@@ -1,7 +1,10 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Dora-Transportadora"/>
+  <div class="home row">
+   <div class="banner"> 
+     <HelloWorld msg="DORA TRANSPORTADORA"/>
+      <img alt="Vue logo" src="../assets/sprinter-background.jpg" class="banner">
+    </div>
+   
   </div>
 </template>
 
@@ -16,3 +19,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.banner {
+  display: block;
+  max-height: 500px;
+  object-fit: cover;
+  width: 100%;
+}
+
+</style>

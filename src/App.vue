@@ -19,6 +19,9 @@
 
 #nav {
   padding: 30px;
+  background-image: url('assets/navbar.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #nav a {

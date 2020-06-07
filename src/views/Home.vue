@@ -1,7 +1,7 @@
 <template>
   <div class="home row">
    <div class="banner"> 
-     <HelloWorld msg="DORA TRANSPORTADORA"/>
+     <HelloWorld msg="TRANSPORTA DORA"/>
       <img alt="Vue logo" src="../assets/sprinter-background.jpg" class="banner">
     </div>
    

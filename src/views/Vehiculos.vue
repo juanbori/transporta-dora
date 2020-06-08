@@ -1,6 +1,6 @@
 <template>
   <div class="card-deck">
-    <div class="card">
+    <div class="card mt-5">
       <img src="../assets/Vehiculos/Moto.jpg" class="card-img-top"> 
             <div class="card-body">     
               <h5 class="card-title">MOTO</h5>
@@ -10,7 +10,7 @@
             </div>
     </div>
 
-    <div class="card">
+    <div class="card mt-5">
       <img src="../assets/Vehiculos/Kangoo.jpg" class="card-img-top"> 
             <div class="card-body">     
               <h5 class="card-title">KANGOO</h5>
@@ -20,7 +20,7 @@
             </div>
     </div>
   
-    <div class="card">
+    <div class="card mt-5">
       <img src="../assets/Vehiculos/F100.jpg" class="card-img-top"> 
             <div class="card-body">     
               <h5 class="card-title">F100</h5>
@@ -30,7 +30,7 @@
             </div>
     </div>
     
-    <div class="card">
+    <div class="card mt-5">
       <img src="../assets/Vehiculos/Camion.jpg" class="card-img-top"> 
             <div class="card-body">     
               <h5 class="card-title">CAMIÓN</h5>

@@ -1,11 +1,25 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">HOME</router-link> |
-      <router-link to="/vehiculos">VEHÍCULOS</router-link> |
-      <router-link to="/servAdicionales">SERVICIOS ADICIONALES</router-link> |
-      <router-link to="/formulario">FORMULARIO DE CONTRATACIÓN</router-link> |
-      <router-link to="/medioPago">MEDIOS DE PAGO</router-link> |
+      <ul class="nav nav-pills">
+        <li class="nav item">
+          <router-link to="/" class="nav-link">HOME</router-link> |
+        </li>  
+        <li class="nav item">
+          <router-link to="/vehiculos" class="nav-link">VEHÍCULOS</router-link> |
+        </li>  
+        <li class="nav item">
+          <router-link to="/servAdicionales" class="nav-link">SERVICIOS ADICIONALES</router-link> |
+        </li>  
+        <li class="nav item">
+          <router-link to="/formulario" class="nav-link">FORMULARIO DE CONTRATACIÓN</router-link> |
+        </li>  
+        <li class="nav item">
+          <router-link to="/medioPago" class="nav-link">MEDIOS DE PAGO</router-link> |
+        </li>  
+      
+      </ul>
+
     </div>
     <router-view/>
   </div>

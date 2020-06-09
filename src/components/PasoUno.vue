@@ -34,6 +34,7 @@ export default {
         "Caja",
         "Ropero",
         "Cama 1 plaza",
+        "Cama 2 plazas",
         "Colchon",
         "Mesa de Luz",
         "Mesa Ratona",

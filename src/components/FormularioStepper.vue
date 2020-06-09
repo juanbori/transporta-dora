@@ -20,11 +20,11 @@
           height="500px"
           
         >
-        <h1>Paso 1</h1>
+        <paso-uno></paso-uno>
         </v-card>
 
         <v-btn
-          color="primary"
+          color="purple"
           @click="e1 = 2"
         >
           Continue
@@ -84,7 +84,7 @@
 <script>
 
 import DatosPersonales from "./DatosPersonales.vue"
-
+import PasoUno from './PasoUno.vue'
 
   export default {
     data () {
@@ -93,7 +93,7 @@ import DatosPersonales from "./DatosPersonales.vue"
       }
     },
     components:{
-
+     PasoUno, 
      DatosPersonales
     }
   }

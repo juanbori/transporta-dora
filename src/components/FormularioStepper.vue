@@ -1,4 +1,8 @@
 <template>
+   <div class="Formulario">
+    
+    
+  
 
 <!-- inicio stepper -->
   <v-stepper v-model="e1">
@@ -24,7 +28,7 @@
         </v-card>
 
         <v-btn
-          color="primary"
+          color="sucess"
           @click="e1 = 2"
         >
           Continue
@@ -37,7 +41,7 @@
         <v-card
           class="mb-12"
           color="grey lighten-1"
-          height="200px"
+          height="1000px"
         >
         <datos-personales></datos-personales>
         </v-card>
@@ -76,7 +80,7 @@
   </v-stepper>
   <!-- fin stepper  -->
 
-
+   </div>
 </template>
 
 

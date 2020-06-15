@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Vehiculos from '../views/Vehiculos.vue'
 import ServAdicionales from '../views/ServAdicionales.vue'
-import Formulario from '../views/Formulario.vue'
 import MedioPago from '../views/MedioPago.vue'
 import FormularioStepper from '../components/FormularioStepper.vue'
 import DatosPersonales from '../components/DatosPersonales.vue'
@@ -24,17 +23,14 @@ Vue.use(VueRouter)
     component: ServAdicionales
   },
   {
-    path: '/formulario',
-    component: Formulario, children: [
+    path: '/formularioStepper',
+    component: FormularioStepper, children: [
       {
-        path: '', component: FormularioStepper, children: [
-          {
-            path: '', component: DatosPersonales
-          }
-        ]
+        path: '', component: DatosPersonales
       }
-    ]
+        ]
   },
+  
   {
     path: '/medioPago',
     component: MedioPago

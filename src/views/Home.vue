@@ -1,7 +1,6 @@
 <template>
   <div class="home row">
    <div class="banner"> 
-     <HelloWorld msg="TRANSPORTA DORA"/>
       <img alt="Vue logo" src="../assets/sprinter-background.jpg" class="banner">
     </div>
    
@@ -10,12 +9,10 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
   }
 }
 </script>

@@ -1,58 +1,47 @@
 <template>
-   <div class="Formulario">
-    
-    
-  
-
-<!-- inicio stepper -->
-  <v-stepper v-model="e1">
+  <!-- inicio stepper -->
+  <v-stepper v-model="paso">
     <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Vehículos y Servicios</v-stepper-step>
+      <v-stepper-step :complete="paso > 1" step="1">Vehículos y Servicios</v-stepper-step>
 
       <v-divider></v-divider>
 
       <v-stepper-step step="2">Datos Personales</v-stepper-step>
-      
     </v-stepper-header>
-    
-      
+
     <v-stepper-items>
       <v-stepper-content step="1">
-        <v-card
-          class="mb-12"
-          color="grey lighten-1"
-          height="500px"
-          
-        >
-        <h1>Paso 1</h1>
+        <v-card class="mb-12" height="1000px">
+          <paso-uno></paso-uno>
         </v-card>
 
-        <v-btn
-          color="sucess"
-          @click="e1 = 2"
-        >
-          Continue
-        </v-btn>
+        <v-btn color="primary" @click="paso = 2">Continue</v-btn>
 
-        <v-btn text>Cancel</v-btn>
+        <v-btn class="secondary" text>Cancel</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <v-card
-          class="mb-12"
-          color="grey lighten-1"
-          height="1000px"
-        >
-        <datos-personales></datos-personales>
+        <v-card class="mb-12" height="500px">
+          <datos-personales></datos-personales>
         </v-card>
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Enviar
-        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >Enviar</button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-header">
@@ -70,35 +59,29 @@
             </div>
           </div>
         </div>
-        
-        <!-- Fin modal -->
-        
-      </v-stepper-content>
 
-     
+        <!-- Fin modal -->
+      </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
   <!-- fin stepper  -->
-
-   </div>
 </template>
 
 
 
 <script>
+import DatosPersonales from "./DatosPersonales.vue";
+import PasoUno from "./PasoUno.vue";
 
-import DatosPersonales from "./DatosPersonales.vue"
-
-
-  export default {
-    data () {
-      return {
-        e1: 1,
-      }
-    },
-    components:{
-
-     DatosPersonales
-    }
+export default {
+  data() {
+    return {
+      paso: 1
+    };
+  },
+  components: {
+    PasoUno,
+    DatosPersonales
   }
+};
 </script>

@@ -1,64 +1,60 @@
 <template>
-  <div class="card-deck">
-    <div class="card mt-5">
-      <img src="../assets/Vehiculos/Moto.jpg" class="card-img-top"> 
-            <div class="card-body">     
-              <h5 class="card-title">MOTO</h5>
-              <p class="card-text">$100 x día</p>
-              <button @click="irDescripcion" class="btn btn-primary">Descripción</button><br>
-              <button @click="irContratar" class="btn btn-primary mt-1">Contratar</button><br>
-            </div>
-    </div>
+  <div>
+   <v-card max-width="600" class="mx-auto">
 
-    <div class="card mt-5">
-      <img src="../assets/Vehiculos/Kangoo.jpg" class="card-img-top"> 
-            <div class="card-body">     
-              <h5 class="card-title">KANGOO</h5>
-              <p class="card-text">$150 x día</p>
-             <button @click="irDescripcion" class="btn btn-primary">Descripción</button><br>
-             <button @click="irContratar" class="btn btn-primary mt-1">Contratar</button><br>
-            </div>
-    </div>
-  
-    <div class="card mt-5">
-      <img src="../assets/Vehiculos/F100.jpg" class="card-img-top"> 
-            <div class="card-body">     
-              <h5 class="card-title">F100</h5>
-              <p class="card-text">$200 x día</p>
-              <button @click="irDescripcion" class="btn btn-primary">Descripción</button><br>
-              <button @click="irContratar" class="btn btn-primary mt-1">Contratar</button><br>
-            </div>
-    </div>
-    
-    <div class="card mt-5">
-      <img src="../assets/Vehiculos/Camion.jpg" class="card-img-top"> 
-            <div class="card-body">     
-              <h5 class="card-title">CAMIÓN</h5>
-              <p class="card-text">$250 x día</p>
-              <button @click="irDescripcion" class="btn btn-primary">Descripción</button><br>
-              <button @click="irContratar" class="btn btn-primary mt-1">Contratar</button><br>
-            </div>
-    </div>
-    
-          
-  </div>
-</template>
-
-
-
-
-
+      <v-row justify="space-between">
+          <v-col
+            v-for="vehiculo in vehiculos"
+            :key="vehiculo.nombre"
+            cols="12"
+          >
+            <v-card class="card border-secondary" :color="vehiculo.color">
+              <div class="d-flex flex-no-wrap justify-space-between">
+               <v-avatar
+                  class="ma-2"
+                  size="125"
+                  height="100%"
+                  width="100%"
+                  max-width="300"
+                  tile
+                >
+                  <v-img :src="vehiculo.imagen"></v-img>
+                </v-avatar>
+                <v-col>
+                    <h5>{{vehiculo.nombre}}</h5>
+                    <p>{{`$ ${vehiculo.precio} por día`}}</p>
+                  <div>
+                    <v-btn class="m-1" @click="irVehiculo" dark>Descripción</v-btn>
+                    <v-btn class="m-1" @click="irContratar" dark>Contratar</v-btn>
+                  </div>
+                </v-col>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+    </v-card>
+  </div>    
+</template>   
 
 <script>
 export default {
-  name: 'Vehiculos',
-  methods:{
-    irDescripcion(){
-      this.$router.push('/ServAdicionales')
+  data() {
+    return{
+      vehiculos:[
+        {nombre:"MOTO", precio:100, imagen:require("../assets/Vehiculos/Moto.png"), color:'#D5D5D5'},
+        {nombre:"KANGOO", precio:150, imagen:require("../assets/Vehiculos/Kangoo.png"), color:'#EEEEEE'},
+        {nombre:"F100", precio:200, imagen:require("../assets/Vehiculos/F100.png"), color:'#F6F8DE'},
+        {nombre:"CAMIÓN", precio:250, imagen:require("../assets/Vehiculos/Camion.png"), color:'#EBECFA'}
+      ]
+  }
+  },
+  methods: {
+    irVehiculo() {
+      this.$router.push("/Camion");
     },
-    irContratar(){
-      this.$router.push('/Formulario')
+    irContratar() {
+      this.$router.push("/FormularioStepper");
     }
   }
-}
+};
 </script>

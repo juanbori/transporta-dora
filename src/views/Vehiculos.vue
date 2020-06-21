@@ -1,25 +1,39 @@
 <template>
   <div>
-    <div v-for="vehiculo in vehiculos" :key="vehiculo.nombre">
+   <v-card max-width="600" class="mx-auto">
 
-      <div class="card border-secondary m-3" style="max-width: 540px;">
-        <div class="row no-gutters">
-          <div class="col-md-6">
-            <img class="card-img-top m-3" v-bind:src="vehiculo.imagen"> 
-          </div>
-          <div class="col-md-6">
-            <div class="card-body">     
-              <h5 class="card-title">{{vehiculo.nombre}}</h5>
-              <p class="card-text">{{`$ ${vehiculo.precio} por día`}}</p>
-              <button @click="irVehiculo" class="btn btn-primary">Descripción</button><br>
-              <button @click="irContratar" class="btn btn-primary mt-1">Contratar</button><br>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>    
+      <v-row justify="space-between">
+          <v-col
+            v-for="vehiculo in vehiculos"
+            :key="vehiculo.nombre"
+            cols="12"
+          >
+            <v-card class="card border-secondary" :color="vehiculo.color">
+              <div class="d-flex flex-no-wrap justify-space-between">
+               <v-avatar
+                  class="ma-2"
+                  size="125"
+                  height="100%"
+                  width="100%"
+                  max-width="300"
+                  tile
+                >
+                  <v-img :src="vehiculo.imagen"></v-img>
+                </v-avatar>
+                <v-col>
+                    <h5>{{vehiculo.nombre}}</h5>
+                    <p>{{`$ ${vehiculo.precio} por día`}}</p>
+                  <div>
+                    <v-btn class="m-1" @click="irVehiculo" dark>Descripción</v-btn>
+                    <v-btn class="m-1" @click="irContratar" dark>Contratar</v-btn>
+                  </div>
+                </v-col>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+    </v-card>
   </div>    
-
 </template>   
 
 <script>
@@ -27,10 +41,10 @@ export default {
   data() {
     return{
       vehiculos:[
-        {nombre:"Moto", precio:100, imagen:require("../assets/Vehiculos/Moto.png")},
-        {nombre:"Kangoo", precio:150, imagen:require("../assets/Vehiculos/Kangoo.png")},
-        {nombre:"F100", precio:200, imagen:require("../assets/Vehiculos/F100.png")},
-        {nombre:"Camión", precio:250, imagen:require("../assets/Vehiculos/Camion.png")}
+        {nombre:"MOTO", precio:100, imagen:require("../assets/Vehiculos/Moto.png"), color:'#D5D5D5'},
+        {nombre:"KANGOO", precio:150, imagen:require("../assets/Vehiculos/Kangoo.png"), color:'#EEEEEE'},
+        {nombre:"F100", precio:200, imagen:require("../assets/Vehiculos/F100.png"), color:'#F6F8DE'},
+        {nombre:"CAMIÓN", precio:250, imagen:require("../assets/Vehiculos/Camion.png"), color:'#EBECFA'}
       ]
   }
   },

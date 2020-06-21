@@ -21,7 +21,7 @@
               <router-link to="/servAdicionales" class="nav-link">SERVICIOS ADICIONALES</router-link>
             </v-btn>
             <v-btn dark>
-              <router-link to="/formulario" class="nav-link">FORMULARIO DE CONTRATACIÓN</router-link>
+              <router-link to="/formularioStepper" class="nav-link">FORMULARIO DE CONTRATACIÓN</router-link>
             </v-btn>
             <v-btn dark>
               <router-link to="/medioPago" class="nav-link">MEDIOS DE PAGO</router-link>

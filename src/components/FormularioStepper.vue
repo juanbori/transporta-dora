@@ -15,14 +15,14 @@
           <paso-uno></paso-uno>
         </v-card>
 
-        <v-btn color="primary" @click="paso = 2">Continue</v-btn>
+        <v-btn @click="paso = 2">Continue</v-btn>
 
-        <v-btn class="secondary" text>Cancel</v-btn>
+        <v-btn class="m-2">Cancel</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <v-card class="mb-12" height="500px">
-          <datos-personales></datos-personales>
+        <v-card class="mb-12" height="1000px">
+          <paso-dos></paso-dos>
         </v-card>
 
         <!-- Button trigger modal -->
@@ -70,7 +70,7 @@
 
 
 <script>
-import DatosPersonales from "./DatosPersonales.vue";
+import PasoDos from "./PasoDos.vue";
 import PasoUno from "./PasoUno.vue";
 
 export default {
@@ -81,7 +81,7 @@ export default {
   },
   components: {
     PasoUno,
-    DatosPersonales
+    PasoDos
   }
 };
 </script>

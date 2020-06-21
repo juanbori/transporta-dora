@@ -1,23 +1,28 @@
 <template>
-  <div id="app">
-    <v-app id="inspire">
-      <div class="row">
-        <div class="col-2" v-for="servicio in servicios" :key="servicio.nombre">
-          <v-card max-width="370" class="mx-auto">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="headline">{{servicio.nombre}}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+  <div class="pt-12" id="app">
+    <v-card class="mx-auto">
+      <v-container fluid fill-height>
+        <v-row dense>
+          <v-col v-for="servicio in servicios" :key="servicio.nombre">
+            <v-card>
+              <v-img
+                :src="servicio.imagen"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
 
-            <v-img v-bind:src="servicio.imagen" height="250"></v-img>
-
-            <v-card-text>{{`$ ${servicio.precio}`}}</v-card-text>
-          </v-card>
-        </div>
-      </div>
-    </v-app>
-    <button @click="irContratar" class="btn btn-primary mt-1">Contratar</button><br>
+              >
+                <v-card-title v-text="servicio.nombre"></v-card-title>
+                <v-card-subtitle class="white--text" align="left">{{`$ ${servicio.precio}`}}</v-card-subtitle>
+              </v-img>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
+    <div class="my-2">
+        <v-btn @click="irContratar">Contratar</v-btn>
+    </div>
   </div>
 </template>
 

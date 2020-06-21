@@ -1,65 +1,80 @@
 <template>
   <div>
-    <div class="card border-secondary m-3" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-8">
-          <img src="../assets/Vehiculos/Camion.png" class="card-img-top m-3" />
-        </div>
-        <div class="col-md-4">
-          <div class="card-body">
-            <h5 class="card-title">CAMIÓN</h5>
-            <p class="card-text">$250 x día</p>
-            <!-- Button trigger modal -->
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-toggle="modal"
-              data-target="#exampleModal"
-            >Descripción</button>
-            <button @click="irContratar" class="btn btn-primary mt-1">Contratar</button>
-            <br />
-          </div>
-        </div>
-      </div>
-    </div>
+   <v-card max-width="600" class="mx-auto">
 
-    
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Medidas del Camión</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img src="../assets/Medidas/CamionCarga.png" class="card-img-top m-3" />
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
+      <v-row justify="space-between">
+          <v-col
+            v-for="vehiculo in vehiculos"
+            :key="vehiculo.nombre"
+            cols="12"
+          >
+            <v-card class="card border-secondary" :color="vehiculo.color" dark>
+              <div class="d-flex flex-no-wrap justify-space-between">
+               <v-avatar
+                  class="ma-2"
+                  size="125"
+                  height="100%"
+                  width="100%"
+                  max-width="300"
+                  tile
+                >
+                  <v-img :src="vehiculo.imagen"></v-img>
+                </v-avatar>
+                <v-col>
+                    <h5>{{vehiculo.nombre}}</h5>
+                    <p>{{`$ ${vehiculo.precio} por día`}}</p>
+                  <div>
+                    <v-dialog v-model="dialog" max-width="290">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn v-bind="attrs" v-on="on">Descripción</v-btn>
+                      </template>
+                        <v-card>
+                          <v-card-title class="headline" v-text="vehiculo.medida"></v-card-title>
+                          <v-img :src="vehiculo.fotoMedida"></v-img>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="green darken-1"
+                              text
+                              @click="cerrarVentana"
+                            >
+                              Cerrar
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                    <v-btn class="m-1" @click="irContratar">Contratar</v-btn>
+                  </div>
+                </v-col>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+    </v-card>
+  </div>    
+</template>   
 
 <script>
 export default {
-  data: () => ({})
+  data() {
+    return{
+      dialog:false,
+      vehiculos:[
+        {nombre:"MOTO", precio:100, imagen:require("../assets/Vehiculos/Moto.png"), color:'#D5D5D5', medida:"Medidas de la moto", fotoMedida:require("../assets/Medidas/MotoCarga.png")},
+        {nombre:"KANGOO", precio:150, imagen:require("../assets/Vehiculos/Kangoo.png"), color:'#EEEEEE', medida:"Medidas de la Kangoo", fotoMedida:require("../assets/Medidas/KangooCarga.png")},
+        {nombre:"F100", precio:200, imagen:require("../assets/Vehiculos/F100.png"), color:'#F6F8DE', medida:"Medidas de la F100", fotoMedida:require("../assets/Medidas/F100Carga.png")},
+        {nombre:"CAMIÓN", precio:250, imagen:require("../assets/Vehiculos/Camion.png"), color:'#EBECFA', medida:"Medidas del camión", fotoMedida:require("../assets/Medidas/CamionCarga.png")}
+      ]
+  }
+  },
+  methods: {
+
+    irContratar() {
+      this.$router.push("/FormularioStepper");
+    },
+    cerrarVentana() {
+      this.dialog=false
+    }
+  }
 };
 </script>
-
-
-

@@ -22,11 +22,11 @@
     <h1 class="text-center">Lista de elementos:</h1>
     <v-list two-line>
       <v-list-item v-for="item in itemsAgregados" :key="item.title">
-        <v-list-item-content>
-          <v-list-item-title v-text="item.nombre" v-if="itemsAgregados.length > 2"></v-list-item-title>
-          <v-list-item-title v-if="itemsAgregados.length > 2">Cantidad: {{item.cantidad}}</v-list-item-title>
+        <v-list-item-content v-if="(!(item.title === '')) && item.cantidad > 0">
+          <v-list-item-title v-text="item.nombre"></v-list-item-title>
+          <v-list-item-title >Cantidad: {{item.cantidad}}</v-list-item-title>
         </v-list-item-content>
-
+      
         <v-list-item-action>
           <v-btn icon>
             <v-icon color="grey lighten-1" @click="agregarItem(item)">mdi-plus-thick</v-icon>
@@ -42,8 +42,31 @@
             <v-icon color="grey lighten-1" @click="eliminar(item)">mdi-delete</v-icon>
           </v-btn>
         </v-list-item-action>
+        
       </v-list-item>
     </v-list>
+    <hr>
+    <h1 class="text-center">Transporte sugerido:</h1>
+     <v-card class="mx-auto">
+      <v-container fluid fill-height>
+        <v-row dense>
+          <v-col v-for="vehiculo in vehiculosSugeridos" :key="vehiculo.nombre">
+            <v-card>
+              <v-img
+                :src="vehiculo.imagen"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
+                contain
+              >
+                <v-card-title v-text="vehiculo.nombre"></v-card-title>
+                <v-card-subtitle class="white--text" align="left">{{`$ ${vehiculo.precio}`}}</v-card-subtitle>
+              </v-img>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
     <hr>
     <h1 class="text-center">Servicios Adicionales:</h1>
     <v-row justify="space-around">
@@ -69,38 +92,57 @@ export default {
   data() {
     return {
       items: [
-        { nombre: "Caja", cantidad: 0 },
-        { nombre: "Ropero", cantidad: 0 },
-        { nombre: "Cama 1 plaza", cantidad: 0 },
-        { nombre: "Cama 2 plazas", cantidad: 0 },
-        { nombre: "Colchon", cantidad: 0 },
-        { nombre: "Mesa de Luz", cantidad: 0 },
-        { nombre: "Mesa", cantidad: 0 }
+        { nombre: "Caja", cantidad: 0, peso: 10},
+        { nombre: "Ropero", cantidad: 0, peso: 150 },
+        { nombre: "Cama 1 plaza", cantidad: 0, peso: 50 },
+        { nombre: "Cama 2 plazas", cantidad: 0, peso: 75 },
+        { nombre: "Colchon", cantidad: 0, peso: 30 },
+        { nombre: "Mesa de Luz", cantidad: 0, peso: 20 },
+        { nombre: "Mesa", cantidad: 0, peso: 30 }
       ],
       serviciosAdicionales: ["Carrito", "Peon", "Canasto", "Escalera", "Embalaje"],
-      itemElegido: {nombre: '', cantidad: 0},
-      itemsAgregados: [{}]
+      itemElegido: {},
+      itemsAgregados: [{}],
+      vehiculosSugeridos: this.$store.getters.vehiculos,
+      pesoAcumulado: 0
     };
   },
   methods: {
     agregarItem(item) {
       item.cantidad++;
+      this.pesoAcumulado += item.peso;
     },
     sacarItem(item) {
       if (item.cantidad >= 1) {
         item.cantidad = item.cantidad - 1;
+      } else if(item.cantidad === 0){
+        this.itemsAgregados.pop(item);
       }
+      this.pesoAcumulado -= item.peso;
     },
     eliminar(item) {
+      let pesoItems = (item.peso) * (item.cantidad);
+      this.pesoAcumulado -= pesoItems;
       item.cantidad = 0;
       this.itemsAgregados.pop(item);
     },
     submit() {
       this.itemElegido.cantidad++;
+      this.pesoAcumulado += this.itemElegido.peso;
       this.itemsAgregados.push(this.itemElegido);
       this.$nextTick(() => {
         this.itemElegido = null;
       });
+      this.verificarPeso();
+    },
+    verificarPeso(){
+      this.vehiculosSugeridos.forEach(
+        vehiculo => {
+          if(this.pesoAcumulado <= vehiculo.capacidad){
+            this.vehiculosSugeridos.pop(vehiculo);
+          }
+        }
+      )
     }
   }
 };

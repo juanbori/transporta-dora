@@ -22,7 +22,8 @@
     <h1 class="text-center">Lista de elementos:</h1>
     <v-list two-line>
       <v-list-item v-for="item in itemsAgregados" :key="item.title">
-        <v-list-item-content v-if="(!(item.title === '')) && item.cantidad > 0">
+        <!-- <v-list-item-content v-if="(!(item.title === '')) && item.cantidad > 0"> -->
+        <v-list-item-content>
           <v-list-item-title v-text="item.nombre"></v-list-item-title>
           <v-list-item-title >Cantidad: {{item.cantidad}}</v-list-item-title>
         </v-list-item-content>

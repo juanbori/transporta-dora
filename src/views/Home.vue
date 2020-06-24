@@ -1,22 +1,29 @@
 <template>
-  <div class="home row">
-   <div class="banner"> 
-     <HelloWorld msg="TRANSPORTA DORA"/>
-      <img alt="Vue logo" src="../assets/sprinter-background.jpg" class="banner">
-    </div>
-   
+  <div class="app">
+     <v-carousel cycle height="600" show-arrows-on-hover>
+      <v-carousel-item
+        v-for="(item,i) in items"
+        :key="i"
+        :src="item.imagen"
+      ></v-carousel-item>
+    </v-carousel>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  data () {
+    return {
+     items:[
+      {imagen:require("../assets/Carousel/sprinter-background.jpg")},
+      {imagen:require("../assets/Carousel/traslado2.jpg")},
+      {imagen:require("../assets/Carousel/traslado3.jpg")},
+      {imagen:require("../assets/Carousel/traslado4.jpg")} 
+     ]
+    }
+  },
 }
 </script>
 

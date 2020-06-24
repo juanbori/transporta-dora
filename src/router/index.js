@@ -5,7 +5,6 @@ import Vehiculos from '../views/Vehiculos.vue'
 import ServAdicionales from '../views/ServAdicionales.vue'
 import MedioPago from '../views/MedioPago.vue'
 import FormularioStepper from '../components/FormularioStepper.vue'
-import VehiculoDescripcion from '../components/VehiculoDescripcion.vue'
 
 Vue.use(VueRouter)
 
@@ -29,9 +28,7 @@ Vue.use(VueRouter)
   
   {
     path: '/medioPago',
-    component: MedioPago, children: [
-      { path: ':id', component: VehiculoDescripcion }
-    ]
+    component: MedioPago
   }
  
 ]

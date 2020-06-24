@@ -1,45 +1,26 @@
 <template>
   <div>
-    <v-app>
-      <div id="app">
-        <v-app-bar color="black accent-4" dense dark>
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-          <v-toolbar-title>
-            <router-link to="/" class="nav-link">TransportaDora</router-link>
-          </v-toolbar-title>
-
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn dark>
-              <router-link to="/" class="nav-link">HOME</router-link>
-            </v-btn>
-            <v-btn dark>
-              <router-link to="/vehiculos" class="nav-link">VEHÍCULOS</router-link>
-            </v-btn>
-            <v-btn dark>
-              <router-link to="/servAdicionales" class="nav-link">SERVICIOS ADICIONALES</router-link>
-            </v-btn>
-            <v-btn dark>
-              <router-link to="/formularioStepper" class="nav-link">FORMULARIO DE CONTRATACIÓN</router-link>
-            </v-btn>
-            <v-btn dark>
-              <router-link to="/medioPago" class="nav-link">MEDIOS DE PAGO</router-link>
-            </v-btn>
-          </v-toolbar-items>
-          <v-menu left bottom>
-            <v-list>
-              <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-                <v-list-item-title>Option {{ n }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-app-bar>
+    <v-app >
+      <Header></Header>
         <router-view />
-      </div>
+      <Footer></Footer>
     </v-app>
   </div>
 </template>
+
+
+<script>
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
+
+
+export default {
+  components: {
+    Header,
+    Footer
+  }
+};
+</script>
 
 <style>
 #app {
@@ -49,10 +30,13 @@
   text-align: center;
   color: #2c3e50;
 }
-
+#footer {
+  background-color: black;
+  color: aliceblue;
+}
 #nav {
   padding: 30px;
-  background-image: url('assets/navbar.png');
+  background-image: url("assets/navbar.png");
   background-repeat: no-repeat;
   background-size: cover;
 }

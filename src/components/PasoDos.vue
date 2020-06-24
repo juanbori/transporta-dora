@@ -67,7 +67,7 @@
               </v-date-picker>
             </v-menu>
 
-          <v-text-field value="450" prefix="Monto a abonar $"></v-text-field>
+          <v-text-field readonly value="450" prefix="Monto a abonar $"></v-text-field>
 
 
           <v-radio-group v-model="row" row>
@@ -93,18 +93,14 @@
             </v-col>  
           </v-radio-group>
 
-          <v-text-field value="400" prefix="Total $"></v-text-field>
+          <v-text-field readonly value="400" prefix="Total $"></v-text-field>
         </v-form>
       </v-card-text>
       <v-divider class="mt-12"></v-divider>
       
-      <v-dialog
-        v-model="dialog"
-        width="500"
-      >
+      <v-dialog v-model="dialog" width="500">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            color="red lighten-2"
             dark
             v-bind="attrs"
             v-on="on"
@@ -114,10 +110,7 @@
         </template>
   
         <v-card>
-          <v-card-title
-            class="headline grey lighten-2"
-            primary-title
-          >
+          <v-card-title class="headline grey lighten-2">
             Mensaje
           </v-card-title>
   
@@ -129,11 +122,7 @@
   
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              text
-              @click="dialog = false"
-            >
+            <v-btn color="primary" @click="dialog = false">
              OK
             </v-btn>
           </v-card-actions>

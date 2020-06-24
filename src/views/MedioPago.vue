@@ -24,7 +24,7 @@
                     <h5>{{vehiculo.nombre}}</h5>
                     <p>{{`$ ${vehiculo.precio} por día`}}</p>
                   <div>
-                    <v-dialog v-model="dialog" max-width="290">
+                    <!-- <v-dialog v-model="dialog" max-width="290">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn v-bind="attrs" v-on="on">Descripción</v-btn>
                       </template>
@@ -42,7 +42,7 @@
                             </v-btn>
                           </v-card-actions>
                         </v-card>
-                    </v-dialog>
+                    </v-dialog> -->
                     <v-btn class="m-1" @click="irContratar">Contratar</v-btn>
                   </div>
                 </v-col>

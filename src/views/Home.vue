@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-     <v-carousel cycle height="600" show-arrows-on-hover>
+     <v-carousel cycle height="700px" show-arrows-on-hover>
       <v-carousel-item
         v-for="(item,i) in items"
         :key="i"

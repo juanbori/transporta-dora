@@ -11,7 +11,7 @@
 
     <v-stepper-items>
       <v-stepper-content step="1">
-        <v-card class="mb-12" height="1500px">
+        <v-card class="mb-12">
           <paso-uno></paso-uno>
         </v-card>
 
@@ -21,7 +21,7 @@
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <v-card class="mb-12" height="1000px">
+        <v-card class="mb-12">
           <paso-dos></paso-dos>
         </v-card>
       </v-stepper-content>

@@ -10,7 +10,6 @@
       deletable-chips
       background-color="blue"
       cache-items
-      item-color="green"
       height="50px"
       open-on-clear
       rounded
@@ -23,8 +22,8 @@
     <v-list two-line>
       <v-list-item v-for="item in itemsAgregados" :key="item.title">
         <v-list-item-content>
-          <v-list-item-title v-text="item.nombre" v-if="itemsAgregados.length > 0"></v-list-item-title>
-          <v-list-item-title v-if="itemsAgregados.length > 0">Cantidad: {{item.cantidad}}</v-list-item-title>
+          <v-list-item-title v-if="itemsAgregados.length > 0" v-text="item.nombre"></v-list-item-title>
+          <v-list-item-title v-if="itemsAgregados.length > 0">Cantidad:{{item.cantidad}}</v-list-item-title>
         </v-list-item-content>
 
         <v-list-item-action>
@@ -44,22 +43,20 @@
         </v-list-item-action>
       </v-list-item>
     </v-list>
-    <hr>
+    <hr />
     <h1 class="text-center">Servicios Adicionales:</h1>
     <v-row justify="space-around">
-    <v-col cols="12" sm="4" md="5">
-      <v-sheet elevation="10" class="py-4 px-1">
-        <v-chip-group
-          multiple
-          active-class="error--text"
-        >
-          <v-chip v-for="servicioAdicional in serviciosAdicionales" :key="servicioAdicional">
-            {{ servicioAdicional }}
-          </v-chip>
-        </v-chip-group>
-      </v-sheet>
-    </v-col>
-  </v-row>
+      <v-col cols="12" sm="4" md="5">
+        <v-sheet elevation="10" class="py-4 px-1">
+          <v-chip-group multiple active-class="error--text">
+            <v-chip
+              v-for="servicioAdicional in serviciosAdicionales"
+              :key="servicioAdicional"
+            >{{ servicioAdicional }}</v-chip>
+          </v-chip-group>
+        </v-sheet>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -77,9 +74,15 @@ export default {
         { nombre: "Mesa de Luz", cantidad: 0 },
         { nombre: "Mesa", cantidad: 0 }
       ],
-      serviciosAdicionales: ["Carrito", "Peon", "Canasto", "Escalera", "Embalaje"],
-      itemElegido: {nombre: '', cantidad: 0},
-      itemsAgregados: [{}]
+      serviciosAdicionales: [
+        "Carrito",
+        "Peon",
+        "Canasto",
+        "Escalera",
+        "Embalaje"
+      ],
+      itemElegido: { nombre: "", cantidad: 0 },
+      itemsAgregados: []
     };
   },
   methods: {
@@ -96,8 +99,19 @@ export default {
       this.itemsAgregados.pop(item);
     },
     submit() {
-      this.itemElegido.cantidad++;
-      this.itemsAgregados.push(this.itemElegido);
+      var i = 0;
+      while (
+        i < this.itemsAgregados.length &&
+        this.itemElegido.nombre != this.itemsAgregados[i].nombre
+      ) {
+        i++;
+      }
+      if (i < this.itemsAgregados.length) {
+        this.itemsAgregados[i].cantidad++;
+      } else {
+        this.itemElegido.cantidad++;
+        this.itemsAgregados.push(this.itemElegido);
+      }
       this.$nextTick(() => {
         this.itemElegido = null;
       });

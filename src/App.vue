@@ -1,12 +1,10 @@
 <template>
-  <div> 
+  <div>
     <Header></Header>
-      <v-app >
-    
-        <router-view />
-        
-      </v-app>
-  <Footer></Footer>
+    <v-app>
+      <router-view />
+      <Footer></Footer>
+    </v-app>
   </div>
 </template>
 
@@ -14,7 +12,6 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
-
 
 export default {
   components: {

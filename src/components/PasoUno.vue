@@ -20,7 +20,7 @@
     <v-btn color="green" @click="submit()">Agregar</v-btn>
     <h1 class="text-center">Lista de elementos:</h1>
     <v-list two-line>
-      <v-list-item v-for="item in itemsAgregados" :key="item.title">
+      <v-list-item v-for="(item, index) in itemsAgregados" :key="item.title">
         <v-list-item-content>
           <v-list-item-title v-if="itemsAgregados.length > 0" v-text="item.nombre"></v-list-item-title>
           <v-list-item-title v-if="itemsAgregados.length > 0">Cantidad:{{item.cantidad}}</v-list-item-title>
@@ -38,7 +38,7 @@
         </v-list-item-action>
         <v-list-item-action>
           <v-btn icon>
-            <v-icon color="grey lighten-1" @click="eliminar(item)">mdi-delete</v-icon>
+            <v-icon color="grey lighten-1" @click="eliminar(index)">mdi-delete</v-icon>
           </v-btn>
         </v-list-item-action>
       </v-list-item>
@@ -91,15 +91,15 @@ export default {
     },
     sacarItem(item) {
       if (item.cantidad >= 1) {
-        item.cantidad = item.cantidad - 1;
+        item.cantidad--;
       }
     },
-    eliminar(item) {
-      item.cantidad = 0;
-      this.itemsAgregados.pop(item);
+    eliminar(index) {
+      this.itemsAgregados[index].cantidad = 0;
+      this.itemsAgregados.splice(index, 1);
     },
     submit() {
-      var i = 0;
+      let i = 0;
       while (
         i < this.itemsAgregados.length &&
         this.itemElegido.nombre != this.itemsAgregados[i].nombre

@@ -46,8 +46,8 @@
     <hr />
     <h1 class="text-center">Servicios Adicionales:</h1>
     <v-row justify="space-around">
-      <v-col cols="12" sm="4" md="5">
-        <v-sheet elevation="10" class="py-4 px-1">
+      <v-col cols="12" md="5">
+        <v-sheet elevation="10" class="py-4 px-5">
           <v-chip-group multiple active-class="error--text">
             <v-chip
               v-for="servicioAdicional in serviciosAdicionales"

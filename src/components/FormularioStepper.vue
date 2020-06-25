@@ -1,6 +1,6 @@
 <template>
   <!-- inicio stepper -->
-  <v-stepper v-model="paso">
+  <v-stepper v-model="paso" class="pb-12">
     <v-stepper-header>
       <v-stepper-step :complete="paso > 1" step="1">Vehículos y Servicios</v-stepper-step>
 
@@ -17,7 +17,7 @@
 
         <v-btn @click="paso = 2">Continue</v-btn>
 
-        <v-btn class="m-2">Cancel</v-btn>
+        <!-- <v-btn class="m-2">Cancel</v-btn> -->
       </v-stepper-content>
 
       <v-stepper-content step="2">

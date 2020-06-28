@@ -19,7 +19,8 @@ export default new Vuex.Store({
         imagen: require("../assets/Vehiculos/Moto.png"),
         color: "#D5D5D5",
         medida: "Medidas de la moto",
-        fotoMedida: require("../assets/Medidas/MotoCarga.png")
+        fotoMedida: require("../assets/Medidas/MotoCarga.png"),
+        capacidad: 20
       },
       {
         nombre: "KANGOO",
@@ -27,7 +28,8 @@ export default new Vuex.Store({
         imagen: require("../assets/Vehiculos/Kangoo.png"),
         color: "#EEEEEE",
         medida: "Medidas de la Kangoo",
-        fotoMedida: require("../assets/Medidas/KangooCarga.png")
+        fotoMedida: require("../assets/Medidas/KangooCarga.png"),
+        capacidad: 500
       },
       {
         nombre: "F100",
@@ -35,7 +37,8 @@ export default new Vuex.Store({
         imagen: require("../assets/Vehiculos/F100.png"),
         color: "#F6F8DE",
         medida: "Medidas de la F100",
-        fotoMedida: require("../assets/Medidas/F100Carga.png")
+        fotoMedida: require("../assets/Medidas/F100Carga.png"),
+        capacidad: 1000
       },
       {
         nombre: "CAMIÓN",
@@ -43,7 +46,8 @@ export default new Vuex.Store({
         imagen: require("../assets/Vehiculos/Camion.png"),
         color: "#EBECFA",
         medida: "Medidas del camión",
-        fotoMedida: require("../assets/Medidas/CamionCarga.png")
+        fotoMedida: require("../assets/Medidas/CamionCarga.png"),
+        capacidad: 3500
       }
     ]
   },

@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex md6>
         <v-card class="mb-3 pa-3">
-          <h4>1 - ¿Qué elementos deseas trasladar?</h4>
+          <h4>1 - ¿Qué elementos desea trasladar?</h4>
           <v-autocomplete
             label="Seleccionar un elemento..."
             :items="productos"
@@ -23,17 +23,24 @@
 
           <v-btn block color="success" @click="submit">Agregar</v-btn>
         </v-card>
-        <v-card>
+        <v-card class="mb-3 pa-3">
           <h4>2 - Servicios Adicionales</h4>
           <v-sheet class="py-4 px-8">
             <v-chip-group>
-              <v-chip
+              <v-chip small
                 v-for="servicioAdicional in serviciosAdicionales"
                 :key="servicioAdicional.nombre"
                 @click="agregarServicio(servicioAdicional)"
               >{{ servicioAdicional.nombre }}</v-chip>
             </v-chip-group>
           </v-sheet>
+        </v-card>
+
+        <v-card class="mb-3 pa-3" v-if="calcularPeso > 0">
+          <p>Este es el vehiculo que mejor se adapta a sus necesidades</p>
+          <v-chip x-large>
+            <v-img width="90" :src="vehiculosFiltrados.imagen"></v-img>
+          </v-chip>
         </v-card>
       </v-flex>
 
@@ -91,19 +98,20 @@ export default {
   data() {
     return {
       productos: [
-        { nombre: "Caja", cantidad: 0 },
-        { nombre: "Ropero", cantidad: 0 },
-        { nombre: "Cama 1 plaza", cantidad: 0 },
-        { nombre: "Cama 2 plazas", cantidad: 0 },
-        { nombre: "Colchon", cantidad: 0 },
-        { nombre: "Mesa de Luz", cantidad: 0 },
-        { nombre: "Mesa", cantidad: 0 }
+        { nombre: "Caja", cantidad: 0, peso: 10 },
+        { nombre: "Ropero", cantidad: 0, peso: 300 },
+        { nombre: "Cama 1 plaza", cantidad: 0, peso: 100 },
+        { nombre: "Cama 2 plazas", cantidad: 0, peso: 200 },
+        { nombre: "Colchon", cantidad: 0, peso: 20 },
+        { nombre: "Mesa de Luz", cantidad: 0, peso: 5 },
+        { nombre: "Mesa", cantidad: 0, peso: 50 }
       ],
       serviciosAdicionales: [],
       itemElegido: { nombre: "", cantidad: 0 },
       itemsAgregados: [],
       serviciosAgregados: [],
-      servicioAdicional:{}
+      servicioAdicional: {},
+      vehiculos: []
     };
   },
   methods: {
@@ -153,9 +161,31 @@ export default {
       this.serviciosAgregados.splice(index, 1);
     }
   },
+  computed: {
+    calcularPeso() {
+      let pesoAcumulado = 0;
+      for (let i = 0; i < this.itemsAgregados.length; i++) {
+        pesoAcumulado +=
+          this.itemsAgregados[i].peso * this.itemsAgregados[i].cantidad;
+      }
+      return pesoAcumulado;
+    },
+    vehiculosFiltrados() {
+      let i = 0;
+      while (
+        i < this.vehiculos.length &&
+        this.vehiculos[i].capacidad < this.calcularPeso
+      ) {
+        i++;
+      }
+      return this.vehiculos[i];
+    }
+  },
   created() {
     const servicios = this.$store.state.servicios;
+    const vehiculos = this.$store.state.vehiculos;
     this.serviciosAdicionales = servicios;
+    this.vehiculos = vehiculos;
   }
 };
 </script>

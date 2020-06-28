@@ -37,7 +37,7 @@
         </v-card>
 
         <v-card class="mb-3 pa-3" v-if="calcularPeso > 0">
-          <p>Este es el vehiculo que mejor se adapta a sus necesidades</p>
+          <p>Este es el vehiculo que mejor se adapta a sus necesidades:</p>
           <v-chip x-large>
             <v-img width="90" :src="vehiculosFiltrados.imagen"></v-img>
           </v-chip>
@@ -86,6 +86,13 @@
               </v-list-item-action>
             </v-list-item>
           </v-list>
+         <v-chip lass="ma-2"
+                color="green"
+                text-color="white"
+                large   
+                label
+                v-if="itemsAgregados.length > 0 || serviciosAgregados.length > 0"     
+                >Total del pedido: ${{ precioTotal }}</v-chip>
         </v-card>
       </v-flex>
     </v-layout>
@@ -94,6 +101,7 @@
 
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -111,10 +119,12 @@ export default {
       itemsAgregados: [],
       serviciosAgregados: [],
       servicioAdicional: {},
-      vehiculos: []
+      vehiculos: [],
+      precioTotal: 0
     };
   },
   methods: {
+    ...mapActions(["actualizarVehiculo", "actualizarPrecioTotal", "actualizarElementos", "actualizarServicios"]),
     submit() {
       let i = 0;
       while (
@@ -132,18 +142,22 @@ export default {
       this.$nextTick(() => {
         this.itemElegido = null;
       });
+      this.calcularPrecio();
     },
     sumarItem(item) {
       item.cantidad++;
+      this.calcularPrecio();
     },
     restarItem(item) {
       if (item.cantidad > 1) {
         item.cantidad--;
       }
+      this.calcularPrecio();
     },
     eliminarItem(index) {
       this.itemsAgregados[index].cantidad = 0;
       this.itemsAgregados.splice(index, 1);
+      this.calcularPrecio();
     },
     agregarServicio(servicioAdicional) {
       let i = 0;
@@ -156,9 +170,24 @@ export default {
       if (i >= this.serviciosAgregados.length) {
         this.serviciosAgregados.push(servicioAdicional);
       }
+      this.calcularPrecio();
     },
     eliminarServicio(index) {
       this.serviciosAgregados.splice(index, 1);
+      this.calcularPrecio();
+    },
+    calcularPrecio() {
+      let precioTotal = 0;          
+      let vehiculoSugerido =  this.vehiculosFiltrados;
+      precioTotal += vehiculoSugerido.precio;
+      this.serviciosAgregados.forEach( servicio => precioTotal += servicio.precio)
+      this.precioTotal = precioTotal;
+    },
+    actualizarStore() {
+      this.actualizarVehiculo(this.vehiculosFiltrados);
+      this.actualizarPrecioTotal(this.precioTotal);
+      this.actualizarElementos(this.itemsAgregados);
+      this.actualizarServicios(this.serviciosAgregados);
     }
   },
   computed: {
@@ -177,9 +206,9 @@ export default {
         this.vehiculos[i].capacidad < this.calcularPeso
       ) {
         i++;
-      }
+      }      
       return this.vehiculos[i];
-    }
+    }    
   },
   created() {
     const servicios = this.$store.state.servicios;

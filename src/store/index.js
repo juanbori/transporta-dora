@@ -49,11 +49,46 @@ export default new Vuex.Store({
         fotoMedida: require("../assets/Medidas/CamionCarga.png"),
         capacidad: 3500
       }
-    ]
+    ],
+    vehiculoSeleccionado: {},
+    precioTotal: 0,
+    elementosSeleccionados: [],
+    serviciosSeleccionados: []
+  },
+  getters: {
+    obtenerVehiculo: state => state.vehiculoSeleccionado,
+    obtenerPrecioVehiculo: state => state.vehiculoSeleccionado.precio,
+    obtenerPrecioTotal: state => state.precioTotal,
+    obtenerElementos: state => state.elementosSeleccionados,
+    obtenerServicios: state => state.serviciosSeleccionados
   },
   mutations: {
+    actualizarVehiculo(state, vehiculo) {
+      state.vehiculo = vehiculo;
+    },
+    actualizarPrecioTotal(state, precio) {
+      state.precioTotal = precio;
+    },
+    actualizarElementos(state, elementos) {
+      state.elementosSeleccionados = elementos;
+    },
+    actualizarServicios(state, servicios) {
+      state.serviciosSeleccionados = servicios;
+    }
   },
   actions: {
+    actualizarVehiculo({ commit }, payload) {
+      commit('actualizarVehiculo', payload)
+    },
+    actualizarPrecioTotal({ commit }, payload) {
+      commit('actualizarPrecioTotal', payload)
+    },
+    actualizarElementos({ commit }, payload) {
+      commit('actualizarElementos', payload)
+    },
+    actualizarServicios({ commit }, payload) {
+      commit('actualizarServicios', payload)
+    },
   },
   modules: {
   }

@@ -15,9 +15,9 @@
           <paso-uno></paso-uno>
         </v-card>
 
-        <v-btn @click="paso = 2">Continue</v-btn>
+        <v-btn @click="paso = 2" color="green">Continuar</v-btn>
 
-        <v-btn @click="irHome" class="m-2">Cancel</v-btn>
+        <v-btn @click="irHome" class="m-2" color="blue">Cancelar</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">

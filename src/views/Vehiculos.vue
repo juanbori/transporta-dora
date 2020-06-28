@@ -40,40 +40,7 @@ export default {
     return {
       descripcion:{},
       dialog: false,
-      vehiculos: [
-        {
-          nombre: "MOTO",
-          precio: 100,
-          imagen: require("../assets/Vehiculos/Moto.png"),
-          color: "#D5D5D5",
-          medida: "Medidas de la moto",
-          fotoMedida: require("../assets/Medidas/MotoCarga.png")
-        },
-        {
-          nombre: "KANGOO",
-          precio: 150,
-          imagen: require("../assets/Vehiculos/Kangoo.png"),
-          color: "#EEEEEE",
-          medida: "Medidas de la Kangoo",
-          fotoMedida: require("../assets/Medidas/KangooCarga.png")
-        },
-        {
-          nombre: "F100",
-          precio: 200,
-          imagen: require("../assets/Vehiculos/F100.png"),
-          color: "#F6F8DE",
-          medida: "Medidas de la F100",
-          fotoMedida: require("../assets/Medidas/F100Carga.png")
-        },
-        {
-          nombre: "CAMIÓN",
-          precio: 250,
-          imagen: require("../assets/Vehiculos/Camion.png"),
-          color: "#EBECFA",
-          medida: "Medidas del camión",
-          fotoMedida: require("../assets/Medidas/CamionCarga.png")
-        }
-      ]
+      vehiculos: []
     };
   },
   methods: {
@@ -86,6 +53,10 @@ export default {
     irDescripcion(index) {
       this.descripcion=this.vehiculos[index];
     }
+  },
+   created(){
+    const vehiculos = this.$store.state.vehiculos
+    this.vehiculos = vehiculos
   }
 };
 </script>

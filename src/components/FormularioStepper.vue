@@ -17,7 +17,7 @@
 
         <v-btn @click="paso = 2">Continue</v-btn>
 
-        <!-- <v-btn class="m-2">Cancel</v-btn> -->
+        <v-btn @click="irHome" class="m-2">Cancel</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
@@ -45,6 +45,11 @@ export default {
   components: {
     PasoUno,
     PasoDos
+  },
+  methods:{
+    irHome(){
+     this.$router.push("/");
+  }
   }
 };
 </script>

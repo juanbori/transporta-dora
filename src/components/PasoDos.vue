@@ -5,10 +5,10 @@
 
       <v-card-text>
         <v-form ref="form" v-model="isValid">
-          <v-text-field v-model="name" :rules="nameRules" label="Nombre y Apellido" required></v-text-field>
+          <v-text-field v-model="form.name" :rules="nameRules" label="Nombre y Apellido" required></v-text-field>
 
           <v-text-field
-            v-model.number="dni"
+            v-model.number="form.dni"
             type="number"
             :rules="dniRules"
             label="DNI"
@@ -16,10 +16,16 @@
             required
           ></v-text-field>
 
-          <v-text-field v-model="email" :rules="emailRules" label="E-mail" error-count="2" required></v-text-field>
+          <v-text-field
+            v-model="form.email"
+            :rules="emailRules"
+            label="E-mail"
+            error-count="2"
+            required
+          ></v-text-field>
 
           <v-text-field
-            v-model="telefono"
+            v-model="form.telefono"
             type="number"
             :rules="telRules"
             label="Teléfono"
@@ -27,7 +33,7 @@
           ></v-text-field>
 
           <v-select
-            v-model="ciudadOrigen"
+            v-model="form.ciudadOrigen"
             :items="ciudades"
             :rules="[v => !!v ||  'El lugar de origen es requerido']"
             placeholder="Lugar de origen..."
@@ -35,7 +41,7 @@
           ></v-select>
 
           <v-select
-            v-model="ciudadDestino"
+            v-model="form.ciudadDestino"
             :items="ciudades"
             :rules="[v => !!v ||  'El lugar de destino es requerido']"
             placeholder="Lugar de destino..."
@@ -53,14 +59,14 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date"
+                v-model="form.date"
                 label="Seleccione el día de traslado"
                 readonly
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="date" no-title scrollable>
+            <v-date-picker v-model="form.date" no-title scrollable>
               <v-spacer></v-spacer>
               <v-btn text color="primary" @click="menu = false">Cerrar</v-btn>
               <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
@@ -97,15 +103,20 @@
       </v-card-text>
       <v-divider class="mt-12"></v-divider>
 
+      <!-- <v-btn dark class="mr-4" @click="validate">Enviar</v-btn> -->
+
       <v-dialog v-model="dialog" width="500">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn dark v-bind="attrs" v-on="on">Enviar</v-btn>
+        <template v-slot:activator="{ on, isValid }">
+          <v-btn @click="validate" dark v-bind="isValid" v-on="on">Enviar</v-btn>
         </template>
 
         <v-card>
           <v-card-title class="headline grey lighten-2">Mensaje</v-card-title>
 
-          <v-card-text>Se ha enviado con éxito</v-card-text>
+          <v-card-text>{{`Usted ha seleccionado el vehiculo ${obtenerVehiculo.nombre} y los servicios:`}}</v-card-text>
+          <v-card-text  v-for="servicio in obtenerServicios"
+                :key="servicio.nombre"> {{servicio.nombre}}</v-card-text>
+          <v-card-text>{{`por un costo total de $ ${obtenerPrecioTotal}`}}</v-card-text>
 
           <v-divider></v-divider>
 
@@ -120,11 +131,20 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data: () => ({
     isValid: true,
-    ciudadOrigen: null,
-    ciudadDestino: null,
+    form: {
+      name: "",
+      dni: "",
+      email: "",
+      telefono: "",
+      ciudadOrigen: null,
+      ciudadDestino: null,
+      date: new Date().toISOString().substr(0, 10)
+    },
+    date: "",
     ciudades: [
       "Agronomía",
       "Almagro",
@@ -175,37 +195,41 @@ export default {
       "Villa Soldati",
       "Villa Urquiza"
     ],
-    name: "",
     nameRules: [
       v => !!v || "El nombre es requerido",
       v => /[a-zA-Z]/.test(v) || "El nombre debe ser válido"
     ],
-    email: "",
     emailRules: [
       v => !!v || "El correo electrónico es requerido",
       v => /.+@.+\..+/.test(v) || "El correo electrónico debe ser válido"
     ],
-    dni: "",
     dniRules: [
       v => !!v || "El DNI es requerido",
       v => (v && v > 1111111 && v <= 99999999) || "No es un DNI válido"
     ],
-    telefono: "",
     telRules: [v => !!v || "Un teléfono de contacto es requerido"],
     row: "null",
     cuota: [1, 2, 3, 6],
     mostrar: false,
-    date: new Date().toISOString().substr(0, 10),
     menu: false,
     dialog: false
   }),
   methods: {
     validate() {
-      this.$refs.form.validate();
+      this.$refs.form.validate()
     },
     mostrarCuotas() {
       this.mostrar = true;
     }
+  },
+  computed: {
+    ...mapGetters([
+      "obtenerVehiculo",
+      "obtenerPrecioVehiculo",
+      "obtenerPrecioTotal",
+      "obtenerElementos",
+      "obtenerServicios"
+    ])
   }
 };
 </script>

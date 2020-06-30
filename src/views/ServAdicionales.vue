@@ -39,8 +39,8 @@ export default {
     }
   },
   created(){
-    const servicios = this.$store.state.servicios
-    this.servicios = servicios
+     this.servicios= this.$store.getters.getServicios;
+     
   }
 };
 </script>

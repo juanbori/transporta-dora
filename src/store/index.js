@@ -60,11 +60,14 @@ export default new Vuex.Store({
     obtenerPrecioVehiculo: state => state.vehiculoSeleccionado.precio,
     obtenerPrecioTotal: state => state.precioTotal,
     obtenerElementos: state => state.elementosSeleccionados,
-    obtenerServicios: state => state.serviciosSeleccionados
+    obtenerServicios: state => state.serviciosSeleccionados,
+    getVehiculos: state => state.vehiculos,
+    getServicios: state => state.servicios
+
   },
   mutations: {
     actualizarVehiculo(state, vehiculo) {
-      state.vehiculo = vehiculo;
+      state.vehiculoSeleccionado = vehiculo;
     },
     actualizarPrecioTotal(state, precio) {
       state.precioTotal = precio;

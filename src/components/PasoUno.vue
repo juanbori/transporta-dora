@@ -27,7 +27,8 @@
           <h4>2 - Servicios Adicionales</h4>
           <v-sheet class="py-4 px-8">
             <v-chip-group>
-              <v-chip small
+              <v-chip
+                small
                 v-for="servicioAdicional in serviciosAdicionales"
                 :key="servicioAdicional.nombre"
                 @click="agregarServicio(servicioAdicional)"
@@ -86,13 +87,17 @@
               </v-list-item-action>
             </v-list-item>
           </v-list>
-         <v-chip lass="ma-2"
-                color="green"
-                text-color="white"
-                large   
-                label
-                v-if="itemsAgregados.length > 0 || serviciosAgregados.length > 0"     
-                >Total del pedido: ${{ precioTotal }}</v-chip>
+
+          <div v-if="itemsAgregados.length > 0 || serviciosAgregados.length > 0">
+            <hr>
+            <v-chip class="mb-1"
+              lass="ma-2"
+              color="grey lighten-1"
+              large
+              label
+            >Total= ${{ precioTotal }}</v-chip>
+            <v-btn block color="success" @click="actualizarStore">Cerrar pedido</v-btn>
+          </div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -124,7 +129,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["actualizarVehiculo", "actualizarPrecioTotal", "actualizarElementos", "actualizarServicios"]),
+    ...mapActions([
+      "actualizarVehiculo",
+      "actualizarPrecioTotal",
+      "actualizarElementos",
+      "actualizarServicios"
+    ]),
     submit() {
       let i = 0;
       while (
@@ -177,10 +187,12 @@ export default {
       this.calcularPrecio();
     },
     calcularPrecio() {
-      let precioTotal = 0;          
-      let vehiculoSugerido =  this.vehiculosFiltrados;
+      let precioTotal = 0;
+      let vehiculoSugerido = this.vehiculosFiltrados;
       precioTotal += vehiculoSugerido.precio;
-      this.serviciosAgregados.forEach( servicio => precioTotal += servicio.precio)
+      this.serviciosAgregados.forEach(
+        servicio => (precioTotal += servicio.precio)
+      );
       this.precioTotal = precioTotal;
     },
     actualizarStore() {
@@ -206,15 +218,13 @@ export default {
         this.vehiculos[i].capacidad < this.calcularPeso
       ) {
         i++;
-      }      
+      }
       return this.vehiculos[i];
-    }    
+    }
   },
   created() {
-    const servicios = this.$store.state.servicios;
-    const vehiculos = this.$store.state.vehiculos;
-    this.serviciosAdicionales = servicios;
-    this.vehiculos = vehiculos;
+    this.serviciosAdicionales = this.$store.getters.getServicios;
+    this.vehiculos = this.$store.getters.getVehiculos;
   }
 };
 </script>

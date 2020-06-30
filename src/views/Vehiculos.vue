@@ -55,8 +55,7 @@ export default {
     }
   },
    created(){
-    const vehiculos = this.$store.state.vehiculos
-    this.vehiculos = vehiculos
+    this.vehiculos  = this.$store.getters.getVehiculos
   }
 };
 </script>

@@ -15,13 +15,14 @@
           <paso-uno></paso-uno>
         </v-card>
 
-        <v-btn @click="paso = 2" color="green">Continuar</v-btn>
+        <v-btn @click="irPasoDos" color="green">Continuar</v-btn>
 
         <v-btn @click="irHome" class="m-2" color="blue">Cancelar</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
         <v-card class="mb-12">
+          <v-btn flat @click.native="paso = 1" color="blue" class="float-left">Volver</v-btn>
           <paso-dos></paso-dos>
         </v-card>
       </v-stepper-content>
@@ -49,6 +50,10 @@ export default {
   methods:{
     irHome(){
      this.$router.push("/");
+  },
+  irPasoDos(){
+    this.paso = 2;
+    this.$root.$refs.pasoUno.actualizarStore();
   }
   }
 };

@@ -103,6 +103,9 @@
       </v-card-text>
       <v-divider class="mt-12"></v-divider>
 
+      <v-btn block color="success" @click="actualizarStore">Cerrar pedido</v-btn>
+
+
       <!-- <v-btn dark class="mr-4" @click="validate">Enviar</v-btn> -->
 
       <v-dialog v-model="dialog" width="500">
@@ -116,7 +119,7 @@
           <v-card-text>{{`Usted ha seleccionado el vehiculo ${obtenerVehiculo.nombre} y los servicios:`}}</v-card-text>
           <v-card-text  v-for="servicio in obtenerServicios"
                 :key="servicio.nombre"> {{servicio.nombre}}</v-card-text>
-          <v-card-text>{{`por un costo total de $ ${obtenerPrecioTotal}`}}</v-card-text>
+          <v-card-text>{{`por un costo total de $ ${getFormulario.name}`}}</v-card-text>
 
           <v-divider></v-divider>
 
@@ -132,6 +135,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data: () => ({
     isValid: true,
@@ -215,11 +219,17 @@ export default {
     dialog: false
   }),
   methods: {
+  ...mapActions([
+      "actualizarFormulario"
+  ]),
     validate() {
       this.$refs.form.validate()
     },
     mostrarCuotas() {
       this.mostrar = true;
+    },
+    actualizarStore() {
+      this.actualizarFormulario(this.form);
     }
   },
   computed: {
@@ -228,7 +238,8 @@ export default {
       "obtenerPrecioVehiculo",
       "obtenerPrecioTotal",
       "obtenerElementos",
-      "obtenerServicios"
+      "obtenerServicios",
+      "getFormulario"
     ])
   }
 };

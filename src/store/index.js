@@ -53,7 +53,8 @@ export default new Vuex.Store({
     vehiculoSeleccionado: {},
     precioTotal: 0,
     elementosSeleccionados: [],
-    serviciosSeleccionados: []
+    serviciosSeleccionados: [],
+    formulario: {}
   },
   getters: {
     obtenerVehiculo: state => state.vehiculoSeleccionado,
@@ -62,7 +63,8 @@ export default new Vuex.Store({
     obtenerElementos: state => state.elementosSeleccionados,
     obtenerServicios: state => state.serviciosSeleccionados,
     getVehiculos: state => state.vehiculos,
-    getServicios: state => state.servicios
+    getServicios: state => state.servicios,
+    getFormulario: state => state.formulario
 
   },
   mutations: {
@@ -77,7 +79,10 @@ export default new Vuex.Store({
     },
     actualizarServicios(state, servicios) {
       state.serviciosSeleccionados = servicios;
-    }
+    },
+    actualizarFormulario(state, payload) {
+      state.formulario = payload;
+    } 
   },
   actions: {
     actualizarVehiculo({ commit }, payload) {
@@ -91,6 +96,9 @@ export default new Vuex.Store({
     },
     actualizarServicios({ commit }, payload) {
       commit('actualizarServicios', payload)
+    },
+    actualizarFormulario({ commit }, payload) {
+      commit('actualizarFormulario', payload)
     },
   },
   modules: {

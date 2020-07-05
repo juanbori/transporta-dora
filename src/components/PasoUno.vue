@@ -95,8 +95,7 @@
               color="grey lighten-1"
               large
               label
-            >Total= ${{ precioTotal }}</v-chip>
-            <v-btn block color="success" @click="actualizarStore">Cerrar pedido</v-btn>
+            >Total = ${{ precioTotal }}</v-chip>            
           </div>
         </v-card>
       </v-flex>
@@ -107,7 +106,8 @@
 
 <script>
 import { mapActions } from "vuex";
-export default {
+export default { 
+  name: 'pasoUno',
   data() {
     return {
       productos: [
@@ -223,6 +223,7 @@ export default {
     }
   },
   created() {
+    this.$root.$refs.pasoUno = this;
     this.serviciosAdicionales = this.$store.getters.getServicios;
     this.vehiculos = this.$store.getters.getVehiculos;
   }

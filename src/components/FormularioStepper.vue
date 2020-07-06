@@ -21,10 +21,10 @@
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <v-card class="mb-12">
-          <v-btn flat @click.native="paso = 1" color="blue" class="float-left">Volver</v-btn>
+        <div class="container mt-5 mb-5">
           <paso-dos></paso-dos>
-        </v-card>
+          <v-btn @click.native="paso = 1" class="mt-5 btn btn-primary">Volver</v-btn>
+        </div>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -47,14 +47,14 @@ export default {
     PasoUno,
     PasoDos
   },
-  methods:{
-    irHome(){
-     this.$router.push("/");
-  },
-  irPasoDos(){
-    this.paso = 2;
-    this.$root.$refs.pasoUno.actualizarStore();
-  }
+  methods: {
+    irHome() {
+      this.$router.push("/");
+    },
+    irPasoDos() {
+      this.paso = 2;
+      this.$root.$refs.pasoUno.actualizarStore();
+    }
   }
 };
 </script>

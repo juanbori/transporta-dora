@@ -1,13 +1,18 @@
 <template>
   <div>
-    <v-app-bar color="black accent-4" dense dark>
+    <v-app-bar color="grey darken-4" dark>
       <span class="hidden-sm-and-up">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </span>
       <v-img src="../assets/Dora_CamionV2.png" max-width="35"></v-img>
 
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">{{titulo}}</router-link>
+        <router-link
+          to="/"
+          tag="span"
+          style="cursor: pointer"
+          class="text-decoration-underline"
+        >{{titulo}}</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
@@ -15,6 +20,9 @@
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
+      <div class="my-2">
+        <v-btn @click="irContratar" color="error">Contratar</v-btn>
+      </div>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -35,13 +43,12 @@
 export default {
   data() {
     return {
-      titulo: "Transporta Dora",
+      titulo: "TRANSPORTA DORA",
       menuItems: [
-        { title: "Home", path: "/" },
-        { title: "Vehículos", path: "/vehiculos" },
+        { title: "Inicio", path: "/" },
+        { title: "Nuestros Vehículos", path: "/vehiculos" },
         { title: "Servicios Adicionales", path: "/servAdicionales" },
-        { title: "Formulario de Contratación", path: "/formularioStepper" },
-        { title: "Métodos de pago", path: "/medioPago" }
+        { title: "Medios de pago", path: "/medioPago" }
       ],
       drawer: false
     };

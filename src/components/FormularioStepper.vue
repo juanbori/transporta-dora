@@ -3,27 +3,22 @@
   <v-stepper v-model="paso" class="pb-12">
     <v-stepper-header>
       <v-stepper-step :complete="paso > 1" step="1">Vehículos y Servicios</v-stepper-step>
-
       <v-divider></v-divider>
-
       <v-stepper-step step="2">Datos Personales</v-stepper-step>
     </v-stepper-header>
-
     <v-stepper-items>
       <v-stepper-content step="1">
-        <v-card class="mb-12">
-          <paso-uno></paso-uno>
-        </v-card>
-
-        <v-btn @click="irPasoDos" color="green">Continuar</v-btn>
-
+        <div class="container mt-5 mb-5">
+            <paso-uno></paso-uno>
+        </div>
+        <v-btn @click="irPasoDos" class="m-2" color="green">Continuar</v-btn>
         <v-btn @click="irHome" class="m-2" color="blue">Cancelar</v-btn>
       </v-stepper-content>
-
       <v-stepper-content step="2">
         <div class="container mt-5 mb-5">
-          <paso-dos></paso-dos>
-          <v-btn @click.native="paso = 1" class="mt-5 btn btn-primary">Volver</v-btn>
+            <paso-dos></paso-dos>
+            <v-btn @click="enviarForm" class="m-2 btn btn-success">Enviar</v-btn>
+            <v-btn @click.native="paso = 1" class="m-2 btn btn-primary">Volver</v-btn>
         </div>
       </v-stepper-content>
     </v-stepper-items>
@@ -54,6 +49,9 @@ export default {
     irPasoDos() {
       this.paso = 2;
       this.$root.$refs.pasoUno.actualizarStore();
+    },
+    enviarForm() {
+      this.$root.$refs.pasoDos.submitForm();
     }
   }
 };

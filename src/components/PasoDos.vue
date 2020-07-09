@@ -202,7 +202,6 @@
         </v-card>
       </v-dialog>
     </div>
-    <v-btn type="submit" class="btn btn-success">Enviar</v-btn>
   </div>
 </template>
 
@@ -331,7 +330,7 @@ export default {
         this.actualizarStore();
         this.dialog = true;
       } else {
-        alert("fijate gato");
+        alert("El formulario presenta errores, por favor corrijalos antes de enviar");
       }
     },
     mostrarCuotas() {
@@ -350,6 +349,9 @@ export default {
       "obtenerServicios",
       "getFormulario"
     ])
+  },
+  created() {
+    this.$root.$refs.pasoDos = this;
   }
 };
 </script>

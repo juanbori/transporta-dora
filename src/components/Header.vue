@@ -52,6 +52,12 @@ export default {
       ],
       drawer: false
     };
-  }
+  },
+    methods: {
+    irContratar() {
+      this.$router.push("/FormularioStepper");
+    }
+  },
+
 };
 </script>

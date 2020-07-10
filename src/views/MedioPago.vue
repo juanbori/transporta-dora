@@ -2,13 +2,17 @@
   <div class="pb-12 pt-12">
     <v-container fluid fill-height>
       <h2 class="font-weight-bold">Medios de pago</h2>
-      <v-row justify="space-between">
-        <v-col  class="mt-3" md="3" v-for="metodo in metodoPago" :key="metodo.titulo">
-          <v-card height="100%">
-          <v-img :src="metodo.imagen"></v-img>
-          <v-card-title class="font-weight-bold justify-center">{{metodo.titulo}}</v-card-title>
-          <v-card-text class="text-left font-weight-bold" v-for="item in metodo.items" :key="item">{{item}}</v-card-text>
-        </v-card>
+      <v-row justify="space-around">
+        <v-col class="mt-3" md="3" v-for="metodo in metodoPago" :key="metodo.titulo">
+          <v-card height="100%" class="pa-6">
+            <v-img :src="metodo.imagen"></v-img>
+            <v-card-title class="font-weight-bold justify-center">{{metodo.titulo}}</v-card-title>
+            <v-card-text
+              class="text-left font-weight-bold"
+              v-for="item in metodo.items"
+              :key="item"
+            >{{item}}</v-card-text>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>

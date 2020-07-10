@@ -1,19 +1,10 @@
 <template>
-  <div class="app pb-12">
-    <v-carousel cycle height="850px" show-arrows-on-hover>
-      <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.imagen">
-        <v-responsive dark>
-          <v-container fill-height>
-            <v-layout align-center>
-              <v-flex>
-                <h3>{{ title }}</h3>
-                <span class="subheading">{{ subtitle }}</span>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-responsive>
-      </v-carousel-item>
-    </v-carousel>
+  <div class="pt-12 pb-12">
+    <h1 class="font-weight-bold">TRANSPORTA DORA</h1>
+      <v-carousel cycle show-arrows-on-hover>
+        <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.imagen"></v-carousel-item>
+      </v-carousel>
+
   </div>
 </template>
 
@@ -29,8 +20,9 @@ export default {
         { imagen: require("../assets/Carousel/traslado4.jpg") }
       ],
       title: "¿Quiénes somos?",
-      subtitle:
-        "Somos una empresa familiar con mas de 10 años de trayectoria, dedicada al transporte de elementos por todo CABA. Nuestro compromiso es satisfacer al cliente en cada una de las entregas, valorando los objetos como si fueran nuestros"
+      subtitle: `Somos una empresa familiar con mas de 10 años de trayectoria, dedicada al transporte de elementos por toda la Ciudad de Buenos Aires.
+         Nuestro compromiso es satisfacer al cliente en cada una de las entregas, valorando los objetos que trasladamos como si fueran nuestros.
+         Cada día nos eligen por nuestro compromiso y seriedad. Esperamos contar con tu apoyo`
     };
   }
 };

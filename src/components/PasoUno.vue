@@ -1,8 +1,9 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout row wrap>
-      <v-flex md6>
-        <v-card class="mb-3 pa-3">
+  <div>
+    <h2>ARME SU PEDIDO</h2>
+    <v-row align="center">
+      <v-col>
+        <div class="mb-3 pa-3">
           <h4>1 - ¿Qué elementos desea trasladar?</h4>
           <v-autocomplete
             label="Seleccionar un elemento..."
@@ -22,8 +23,8 @@
           ></v-autocomplete>
 
           <v-btn block color="success" @click="submit">Agregar</v-btn>
-        </v-card>
-        <v-card class="mb-3 pa-3">
+        </div>
+        <div class="mb-3 pa-3">
           <h4>2 - Servicios Adicionales</h4>
           <v-sheet class="py-4 px-8">
             <v-chip-group>
@@ -35,7 +36,7 @@
               >{{ servicioAdicional.nombre }}</v-chip>
             </v-chip-group>
           </v-sheet>
-        </v-card>
+        </div>
 
         <v-card class="mb-3 pa-3" v-if="calcularPeso > 0">
           <p>Este es el vehiculo que mejor se adapta a sus necesidades:</p>
@@ -43,39 +44,39 @@
             <v-img width="90" :src="vehiculosFiltrados.imagen"></v-img>
           </v-chip>
         </v-card>
-      </v-flex>
+      </v-col>
+      <v-divider vertical></v-divider>
 
-      <v-flex md6>
-        <v-card class="mb-3 pa-3">
-          <h4>Pedido</h4>
-          <v-list v-if="itemsAgregados.length > 0">
+      <v-sheet class="d-flex" color="grey lighten-3" height="600" width="30%">
+        <v-col>
+          <h4 class="display-1">Pedido</h4>
+          <v-divider></v-divider>
+          <v-list color="grey lighten-3" v-if="itemsAgregados.length > 0">
             <v-list-item-subtitle class="text-sm-left">Productos:</v-list-item-subtitle>
             <v-list-item v-for="(item, index) in itemsAgregados" :key="item.nombre">
-              <v-list-item-content>
+              <v-list-item-content >
                 <v-list-item v-if="itemsAgregados.length > 0">
                   {{`${item.nombre}`}}
-                  <v-chip class="ma-2" label>{{item.cantidad}}</v-chip>
+                  <v-chip color="red lighten-1" class="ma-2" label>{{item.cantidad}}</v-chip>
                 </v-list-item>
               </v-list-item-content>
-
               <v-list-item-action>
                 <v-btn icon>
-                  <v-icon color="grey lighten-1" @click="sumarItem(item)">mdi-plus-thick</v-icon>
+                  <v-icon color="grey darken-1" @click="sumarItem(item)">mdi-plus-thick</v-icon>
                 </v-btn>
               </v-list-item-action>
               <v-list-item-action>
                 <v-btn icon>
-                  <v-icon color="grey lighten-1" @click="restarItem(item)">mdi-minus</v-icon>
+                  <v-icon color="grey darken-1" @click="restarItem(item)">mdi-minus</v-icon>
                 </v-btn>
               </v-list-item-action>
               <v-list-item-action>
                 <v-btn icon>
-                  <v-icon color="grey lighten-1" @click="eliminarItem(index)">mdi-delete</v-icon>
+                  <v-icon color="grey darken-1" @click="eliminarItem(index)">mdi-delete</v-icon>
                 </v-btn>
               </v-list-item-action>
             </v-list-item>
           </v-list>
-
           <v-list v-if="serviciosAgregados.length > 0">
             <v-list-item-subtitle class="text-sm-left">Servicios:</v-list-item-subtitle>
             <v-list-item v-for="(item, index) in serviciosAgregados" :key="item.nombre">
@@ -86,28 +87,26 @@
                 </v-btn>
               </v-list-item-action>
             </v-list-item>
-          </v-list>
-
-          <div v-if="itemsAgregados.length > 0 || serviciosAgregados.length > 0">
-            <hr>
-            <v-chip class="mb-1"
+            <v-divider></v-divider>
+            <v-chip
+              class="mb-1"
               lass="ma-2"
               color="grey lighten-1"
               large
               label
-            >Total = ${{ precioTotal }}</v-chip>            
-          </div>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+            >Total = ${{ precioTotal }}</v-chip>
+          </v-list>
+        </v-col>
+      </v-sheet>
+    </v-row>
+  </div>
 </template>
 
 
 <script>
 import { mapActions } from "vuex";
-export default { 
-  name: 'pasoUno',
+export default {
+  name: "pasoUno",
   data() {
     return {
       productos: [

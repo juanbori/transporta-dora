@@ -8,7 +8,7 @@
     </v-stepper-header>
     <v-stepper-items>
       <v-stepper-content step="1">
-        <div class="container mt-5 mb-5">
+        <div class="mt-5 mb-5">
             <paso-uno></paso-uno>
         </div>
         <v-btn @click="irPasoDos" class="m-2" color="green">Continuar</v-btn>

@@ -10,7 +10,7 @@
         <p class="text-justify font-italic">{{ subtitle }}</p>
       </div>
       <v-carousel height="auto" hide-delimiters cycle show-arrows-on-hover>
-        <h3 class="font-weight-medium pt-12">Conocé lo que tenemos para vos</h3>
+        <h3 class="font-weight-medium pt-12">Conocé nuestros vehículos</h3>
         <v-carousel-item v-for="(vehiculo) in vehiculos" :key="vehiculo.nombre">
           <v-col>
             <v-avatar class="ma-2" height="auto" width="auto" max-width="250" tile>
@@ -63,7 +63,7 @@ export default {
         {
           persona: "Juan",
           lugar: "Microcentro",
-          frase: "Super atentos y cuidados con todos mis muebles"
+          frase: "Super atentos y cuidadosos con todos mis muebles"
         },
         {
           persona: "Melina",

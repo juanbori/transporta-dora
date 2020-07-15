@@ -1,17 +1,21 @@
 <template>
-  <div>
+  <div class="pb-16 mb-16">
     <h2 class="text-decoration-underline">ARME SU PEDIDO</h2>
-    <v-row align="center">
+    <v-row align="center" class="pa-5">
       <v-col>
-        <div class="mb-3 pa-3">
-          <h4>1 - ¿Qué elementos desea trasladar?</h4>
+        <div>
           <v-container fluid>
-            <v-data-iterator :items="productos" :search="search" hide-default-footer>
+            <h4 class="text-left">1 - ¿Qué elementos desea trasladar?</h4>
+            <v-data-iterator
+              class="mb-3 pa-3"
+              :items="productos"
+              :search="search"
+              hide-default-footer
+            >
               <template v-slot:header>
-                <v-toolbar dark color="blue darken-3" class="mb-1">
+                <v-toolbar color="grey lighten-3" class="mb-4">
                   <v-text-field
                     v-model="search"
-                    clearable
                     flat
                     solo-inverted
                     hide-details
@@ -30,19 +34,17 @@
                     lg="2"
                   >
                     <v-card>
-                      <v-card-title
+                      <v-card-subtitle
                         v-model="itemElegido"
                         @click="submit(index)"
-                        class="justify-center font-weight-bold"
-                      >{{ producto.nombre }}</v-card-title>
-                      <v-divider></v-divider>
+                        class="justify-center font-weight-bold pa-5"
+                      >{{ producto.nombre }}</v-card-subtitle>
                     </v-card>
                   </v-col>
                 </v-row>
               </template>
             </v-data-iterator>
-          </v-container>
-          <!-- <v-autocomplete
+            <!-- <v-autocomplete
             label="Seleccionar un elemento..."
             :items="productos"
             item-text="nombre"
@@ -60,87 +62,96 @@
           ></v-autocomplete>
 
           <v-btn block color="success" @click="submit">Agregar</v-btn>
-        </div>
-          <div class="mb-3 pa-3">-->
-          <h4>2 - Servicios Adicionales</h4>
-          <v-sheet class="py-4 px-8">
-            <v-chip-group>
+          </div>
+            <div class="mb-3 pa-3">-->
+            <h4 class="text-left mt-6 mb-6">2 - Servicios Adicionales</h4>
+            <v-row justify="center">
               <v-chip
-                small
+                large
+                class="ma-4 pa-4"
                 v-for="servicioAdicional in serviciosAdicionales"
                 :key="servicioAdicional.nombre"
                 @click="agregarServicio(servicioAdicional)"
               >{{ servicioAdicional.nombre }}</v-chip>
-            </v-chip-group>
-          </v-sheet>
+            </v-row>
+          </v-container>
         </div>
-
-        <v-card class="mb-3 pa-3" v-if="calcularPeso > 0">
-          <p>Este es el vehiculo que mejor se adapta a sus necesidades:</p>
-          <v-chip x-large>
-            <v-img width="90" :src="vehiculosFiltrados.imagen"></v-img>
-          </v-chip>
-        </v-card>
       </v-col>
-      <v-divider vertical></v-divider>
-
-      <v-sheet class="d-flex" color="grey lighten-3" height="600" width="30%">
+      <v-sheet
+        class="d-flex"
+        color="grey lighten-3"
+        height="510"
+        width="30%"
+        v-if="itemsAgregados.length > 0 || serviciosAgregados.length > 0"
+      >
         <v-col>
-          <h4 class="display-1">Pedido</h4>
+          <h4 class="display-1">PEDIDO</h4>
           <v-divider></v-divider>
-          <v-list color="grey lighten-3" v-if="itemsAgregados.length > 0">
-            <v-list-item-subtitle class="text-sm-left">Productos:</v-list-item-subtitle>
-            <v-list-item v-for="(item, index) in itemsAgregados" :key="item.nombre">
-              <v-list-item-content>
-                <v-list-item v-if="itemsAgregados.length > 0">
-                  {{`${item.nombre}`}}
-                  <v-chip color="red lighten-1" class="ma-2" label>{{item.cantidad}}</v-chip>
-                </v-list-item>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn icon>
-                  <v-icon color="grey darken-1" @click="sumarItem(item)">mdi-plus-thick</v-icon>
-                </v-btn>
-              </v-list-item-action>
-              <v-list-item-action>
-                <v-btn icon>
-                  <v-icon color="grey darken-1" @click="restarItem(item)">mdi-minus</v-icon>
-                </v-btn>
-              </v-list-item-action>
-              <v-list-item-action>
-                <v-btn icon>
-                  <v-icon color="grey darken-1" @click="eliminarItem(index)">mdi-delete</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </v-list-item>
-          </v-list>
-          <v-list v-if="serviciosAgregados.length > 0">
-            <v-list-item-subtitle class="text-sm-left">Servicios:</v-list-item-subtitle>
-            <v-list-item v-for="(item, index) in serviciosAgregados" :key="item.nombre">
-              <v-list-item-content>{{`${item.nombre}`}}</v-list-item-content>
-              <v-list-item-action>
-                <v-btn icon>
-                  <v-icon color="grey lighten-1" @click="eliminarServicio(index)">mdi-delete</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </v-list-item>
-          </v-list>
+          <v-navigation-drawer permanent width="100%" height="400" color="grey lighten-3">
+            <v-list color="grey lighten-3">
+              <v-list-item-subtitle
+                v-if="itemsAgregados.length > 0"
+                class="text-sm-left h6 text-decoration-underline"
+              >PRODUCTOS:</v-list-item-subtitle>
+              <v-list-item v-for="(item, index) in itemsAgregados" :key="item.nombre">
+                <v-list-item-content>
+                  <v-list-item>
+                    {{`${item.nombre}`}}
+                    <v-chip color="red lighten-1" class="ma-2" label>{{item.cantidad}}</v-chip>
+                  </v-list-item>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <v-btn icon>
+                    <v-icon color="grey darken-1" @click="sumarItem(item)">mdi-plus-thick</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+                <v-list-item-action>
+                  <v-btn icon>
+                    <v-icon color="grey darken-1" @click="restarItem(item)">mdi-minus</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+                <v-list-item-action>
+                  <v-btn icon>
+                    <v-icon color="grey darken-1" @click="eliminarItem(index)">mdi-delete</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
+            <v-list color="grey lighten-3" v-if="serviciosAgregados.length > 0">
+              <v-list-item-subtitle class="text-sm-left h6 text-decoration-underline">SERVICIOS:</v-list-item-subtitle>
+              <v-list-item v-for="(item, index) in serviciosAgregados" :key="item.nombre">
+                <v-list-item-content>{{`${item.nombre}`}}</v-list-item-content>
+                <v-list-item-action>
+                  <v-btn icon>
+                    <v-icon color="grey darken-1" @click="eliminarServicio(index)">mdi-delete</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
+          </v-navigation-drawer>
           <div v-if="itemsAgregados.length > 0 || serviciosAgregados.length > 0">
             <v-divider></v-divider>
-            <v-chip
-              class="mb-1"
-              lass="ma-2"
-              color="grey lighten-1"
-              large
-              label
-            >Total = ${{ precioTotal }}</v-chip>
+            <v-chip class="mb-1" color="grey lighten-1" large label>Total = ${{ precioTotal }}</v-chip>
           </div>
+          <v-card class="mt-3">
+            <v-row align="center" v-if="calcularPeso > 0">
+              <v-col>
+                <h5>Vehículo requerido:</h5>
+              </v-col>
+              <v-col>
+                <div class="mt-3">
+                  <v-chip x-large>
+                    <v-img width="100" height="auto" :src="vehiculosFiltrados.imagen"></v-img>
+                  </v-chip>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
         </v-col>
       </v-sheet>
     </v-row>
   </div>
 </template>
-
 
 <script>
 import { mapActions } from "vuex";
@@ -152,7 +163,7 @@ export default {
         { nombre: "Caja", cantidad: 0, peso: 10 },
         { nombre: "Ropero", cantidad: 0, peso: 300 },
         { nombre: "Cama King", cantidad: 0, peso: 100 },
-        { nombre: "Cama Queen", cantidad: 0, peso: 200 },
+        { nombre: "Cocina", cantidad: 0, peso: 50 },
         { nombre: "Colchon", cantidad: 0, peso: 20 },
         { nombre: "Mesa de Luz", cantidad: 0, peso: 5 },
         { nombre: "Mesa", cantidad: 0, peso: 50 },
@@ -199,9 +210,9 @@ export default {
         this.productosFiltrados[indice].cantidad++;
         this.itemsAgregados.push(this.productosFiltrados[indice]);
       }
-      // this.$nextTick(() => {
-      //   this.itemElegido = null;
-      // });
+      this.$nextTick(() => {
+        this.search = "";
+      });
       this.calcularPrecio();
     },
     sumarItem(item) {

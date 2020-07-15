@@ -148,7 +148,7 @@
           </v-menu>
         </div>
         <div class="form-group">
-          <v-text-field outlined readonly value="450" prefix="Monto a abonar $"></v-text-field>
+          <v-text-field outlined readonly :value="obtenerPrecioTotal" prefix="Monto a abonar $"></v-text-field>
         </div>
         <div class="form-group">
           <v-radio-group v-model="form.tipoPago" row>
@@ -181,19 +181,23 @@
           </v-radio-group>
         </div>
         <div class="form-group">
-          <v-text-field outlined readonly value="400" prefix="Total $"></v-text-field>
+          <v-text-field outlined readonly :value="calcularPromo(form.tipoPago)" prefix="Total $"></v-text-field>
         </div>
       </v-form>
 
       <v-dialog v-model="dialog" width="500">
         <v-card>
-          <v-card-title class="headline grey lighten-2">Mensaje</v-card-title>
-          <v-card-text>{{`Usted ha seleccionado el vehiculo ${getFormulario.nombre} y los servicios:`}}</v-card-text>
-          <v-card-text
+          <v-card-title class="headline grey lighten-2">Ha realizado su pedido</v-card-title>
+          <v-card-text>{{`Usted ha seleccionado el vehiculo ${obtenerVehiculo.nombre}`}}</v-card-text>
+          <v-card-text v-show="obtenerServicios.length >0">{{`y los servicios`}}</v-card-text>
+          <span
+            class="body-2"
+            v-show="obtenerServicios.length >0"
             v-for="servicio in obtenerServicios"
             :key="servicio.nombre"
-          >{{servicio.nombre}}</v-card-text>
-          <v-card-text>{{`por un costo total de $ ${obtenerPrecioTotal}`}}</v-card-text>
+          >{{servicio.nombre}}</span>
+          <v-card-text>{{`por un costo total de $ ${calcularPromo(form.tipoPago)}`}}</v-card-text>
+          <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -215,11 +219,13 @@ import {
   alpha,
   numeric
 } from "vuelidate/lib/validators";
+import QrcodeVue from "qrcode.vue";
 
 export default {
   data() {
     return {
-      //isValid: true,
+      value: "http://localhost:8080/pedido/",
+      size: 200,
       form: {
         nombre: "",
         apellido: "",
@@ -228,7 +234,7 @@ export default {
         telefono: "",
         ciudadOrigen: null,
         ciudadDestino: null,
-        tipoPago: null,
+        tipoPago: "efectivo",
         date: new Date().toISOString().substr(0, 10)
       },
       date: "",
@@ -286,8 +292,11 @@ export default {
       mostrar: false,
       menu: false,
       dialog: false,
-      submitStatus: null
+      submitStatus: null,
     };
+  },
+  components: {
+    QrcodeVue
   },
   validations: {
     form: {
@@ -330,7 +339,9 @@ export default {
         this.actualizarStore();
         this.dialog = true;
       } else {
-        alert("El formulario presenta errores, por favor corrijalos antes de enviar");
+        alert(
+          "El formulario presenta errores, por favor corrijalos antes de enviar"
+        );
       }
     },
     mostrarCuotas() {
@@ -338,7 +349,19 @@ export default {
     },
     actualizarStore() {
       this.actualizarFormulario(this.form);
-    }
+    },
+    calcularPromo(key) {
+      if (key == "efectivo") {
+        let valor = (this.obtenerPrecioTotal * 80) / 100;
+        return valor;
+      } else if (key == "debito") {
+        let valor = this.obtenerPrecioTotal;
+        return valor;
+      } else {
+        let valor = (this.obtenerPrecioTotal * 105) / 100;
+        return valor;
+      }
+    },
   },
   computed: {
     ...mapGetters([

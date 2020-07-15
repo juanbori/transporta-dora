@@ -48,16 +48,16 @@ export default {
         { title: "Inicio", path: "/" },
         { title: "Nuestros Vehículos", path: "/vehiculos" },
         { title: "Servicios Adicionales", path: "/servAdicionales" },
-        { title: "Medios de pago", path: "/medioPago" }
+        { title: "Medios de pago", path: "/medioPago" },
+        { title: "Pedido", path: "/pedido" }
       ],
       drawer: false
     };
   },
-    methods: {
+  methods: {
     irContratar() {
       this.$router.push("/FormularioStepper");
     }
-  },
-
+  }
 };
 </script>

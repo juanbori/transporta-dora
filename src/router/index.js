@@ -5,10 +5,11 @@ import Vehiculos from '../views/Vehiculos.vue'
 import ServAdicionales from '../views/ServAdicionales.vue'
 import MedioPago from '../views/MedioPago.vue'
 import FormularioStepper from '../components/FormularioStepper.vue'
+import Pedido from '../views/Pedido.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     component: Home
@@ -25,17 +26,17 @@ Vue.use(VueRouter)
     path: '/formularioStepper',
     component: FormularioStepper
   },
-  
   {
     path: '/medioPago',
     component: MedioPago
-  }
- 
+  },
+  {
+    path: '/pedido',
+    component: Pedido
+  },
 ]
-
 const router = new VueRouter({
   routes,
-  mode:'history'
+  mode: 'history'
 })
-
 export default router

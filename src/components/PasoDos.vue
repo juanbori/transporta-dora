@@ -188,14 +188,14 @@
       <v-dialog v-model="dialog" width="500">
         <v-card>
           <v-card-title class="headline grey lighten-2">Ha realizado su pedido</v-card-title>
-          <v-card-text>{{`Usted ha seleccionado el vehiculo ${obtenerVehiculo.nombre}`}}</v-card-text>
-          <v-card-text v-show="obtenerServicios.length >0">{{`y los servicios`}}</v-card-text>
+          <v-card-text>{{`Vehiculo de traslado: ${obtenerVehiculo.nombre}`}}</v-card-text>
+          <v-card-text v-show="obtenerServicios.length >0">{{`Servicios adicionales:`}}</v-card-text>
           <span
             class="body-2"
             v-show="obtenerServicios.length >0"
             v-for="servicio in obtenerServicios"
             :key="servicio.nombre"
-          >{{servicio.nombre}}</span>
+          >{{servicio.nombre}}<br></span>
           <v-card-text>{{`por un costo total de $ ${calcularPromo(form.tipoPago)}`}}</v-card-text>
           <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue>
           <v-divider></v-divider>

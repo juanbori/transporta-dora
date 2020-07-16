@@ -47,8 +47,13 @@ export default {
       this.$router.push("/");
     },
     irPasoDos() {
-      this.paso = 2;
       this.$root.$refs.pasoUno.actualizarStore();
+
+      if(this.$store.getters.obtenerElementos.length > 0) {
+        this.paso = 2;
+      } else {
+        alert("Debe seleccionar al menos un elemento a trasladar.")
+      }
     },
     enviarForm() {
       this.$root.$refs.pasoDos.submitForm();

@@ -101,6 +101,4 @@ export default new Vuex.Store({
       commit('actualizarFormulario', payload)
     },
   },
-  modules: {
-  }
 })

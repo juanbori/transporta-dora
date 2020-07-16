@@ -220,6 +220,7 @@ import {
   numeric
 } from "vuelidate/lib/validators";
 import QrcodeVue from "qrcode.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -235,7 +236,9 @@ export default {
         ciudadOrigen: null,
         ciudadDestino: null,
         tipoPago: "efectivo",
-        date: new Date().toISOString().substr(0, 10)
+        date: new Date().toISOString().substr(0, 10),
+        vehiculo: "",
+        serviciosAdicio: []
       },
       date: "",
       ciudades: [
@@ -292,7 +295,7 @@ export default {
       mostrar: false,
       menu: false,
       dialog: false,
-      submitStatus: null,
+      submitStatus: null
     };
   },
   components: {
@@ -338,6 +341,7 @@ export default {
       if (!this.$v.$invalid) {
         this.actualizarStore();
         this.dialog = true;
+        this.postpedido();
       } else {
         alert(
           "El formulario presenta errores, por favor corrijalos antes de enviar"
@@ -362,15 +366,32 @@ export default {
         return valor;
       }
     },
+    armarFormulario() {
+      this.form.vehiculo = this.obtenerVehiculo.nombre;
+      for (let index = 0; index < this.obtenerServicios.length; index++) {
+        this.form.serviciosAdicio.push(this.obtenerServicios[index].nombre)
+      }
+    },
+    async postpedido() {
+      this.armarFormulario()
+      let pedido = this.form;
+      if (!this.$v.$invalid) {
+        try {
+          const respuesta = await axios.post("/pedido", pedido);
+          console.log("success");
+          return respuesta;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
   },
   computed: {
     ...mapGetters([
       "obtenerVehiculo",
-      "obtenerPrecioVehiculo",
       "obtenerPrecioTotal",
       "obtenerElementos",
-      "obtenerServicios",
-      "getFormulario"
+      "obtenerServicios"
     ])
   },
   created() {

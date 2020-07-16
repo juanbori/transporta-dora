@@ -71,7 +71,6 @@
 </template>
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -79,15 +78,6 @@ export default {
       pedido: {},
       mostrar: false
     };
-  },
-  computed: {
-    ...mapGetters([
-      "obtenerVehiculo",
-      "obtenerPrecioVehiculo",
-      "obtenerPrecioTotal",
-      "obtenerElementos",
-      "obtenerServicios"
-    ])
   },
   methods: {
     async getpedido() {

@@ -26,9 +26,9 @@
       <div>
         <h3 class="font-weight-medium pt-12">Nuestros Clientes</h3>
         <v-row class="pt-6 pb-12" justify="space-between">
-          <v-card width="225px" v-for="comentario in comentarios" :key="comentario.persona">
+          <v-card class="ma-3" width="200px" v-for="comentario in comentarios" :key="comentario.persona">
             <v-card-text>
-              <p class="display-1 text--primary">{{`${comentario.persona} de ${comentario.lugar}`}}</p>
+              <p class="h4 text--primary">{{`${comentario.persona} de ${comentario.lugar}`}}</p>
               <div class="text--primary">{{comentario.frase}}</div>
             </v-card-text>
           </v-card>

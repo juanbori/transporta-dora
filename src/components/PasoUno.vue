@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-16 mb-16">
+  <div class="mb-16">
     <h2 class="text-decoration-underline">ARME SU PEDIDO</h2>
     <v-row align="center" class="pa-5">
       <v-col>
@@ -44,27 +44,8 @@
                 </v-row>
               </template>
             </v-data-iterator>
-            <!-- <v-autocomplete
-            label="Seleccionar un elemento..."
-            :items="productos"
-            item-text="nombre"
-            hide-no-data
-            clearable
-            small-chips
-            deletable-chips
-            background-color="grey lighten-1"
-            cache-items
-            height="50px"
-            open-on-clear
-            rounded
-            return-object
-            v-model="itemElegido"
-          ></v-autocomplete>
-
-          <v-btn block color="success" @click="submit">Agregar</v-btn>
-          </div>
-            <div class="mb-3 pa-3">-->
-            <h4 class="text-left mt-6 mb-6">2 - Servicios Adicionales</h4>
+            <h4 class="text-left mt-6 mb-6">2 - ¿Qué servicios adicionales desea contratar?
+            </h4>
             <v-row justify="center">
               <v-chip
                 large
@@ -136,7 +117,7 @@
           <v-card class="mt-3">
             <v-row align="center" v-if="calcularPeso > 0">
               <v-col>
-                <h5>Vehículo requerido:</h5>
+                <h5>Vehículo necesario:</h5>
               </v-col>
               <v-col>
                 <div class="mt-3">

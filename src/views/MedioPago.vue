@@ -2,7 +2,7 @@
   <div class="pb-12 pt-12">
     <v-container fluid fill-height>
       <h2 class="font-weight-bold">Medios de pago</h2>
-      <v-row justify="space-around">
+      <v-row justify="center">
         <v-col class="mt-3" md="3" v-for="metodo in metodoPago" :key="metodo.titulo">
           <v-card height="100%" class="pa-6">
             <v-img :src="metodo.imagen"></v-img>
@@ -64,7 +64,7 @@ export default {
           items: [
             "1 Cuota + 5% de interés",
             "2 Cuotas + 5% de interés",
-            "3 Cuotas sin interés",
+            "3 Cuotas + 5% de interés",
             "6 Cuotas + 5% de interés"
           ],
           imagen: require("../assets/pago/credit-card.svg")
@@ -74,5 +74,3 @@ export default {
   }
 };
 </script>
-<style>
-</style>

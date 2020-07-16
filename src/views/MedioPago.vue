@@ -1,9 +1,9 @@
 <template>
-  <div class="pb-12 pt-12">
+  <div class="pb-12">
     <v-container fluid fill-height>
       <h2 class="font-weight-bold">Medios de pago</h2>
       <v-row justify="center">
-        <v-col class="mt-3" md="3" v-for="metodo in metodoPago" :key="metodo.titulo">
+        <v-col md="3" v-for="metodo in metodoPago" :key="metodo.titulo">
           <v-card height="100%" class="pa-6">
             <v-img :src="metodo.imagen"></v-img>
             <v-card-title class="font-weight-bold justify-center">{{metodo.titulo}}</v-card-title>
@@ -17,28 +17,28 @@
       </v-row>
     </v-container>
     <v-row justify="center">
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/ciudad.jpg"></v-img>
       </v-col>
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/galicia.jpg"></v-img>
       </v-col>
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/hipotecario.jpg"></v-img>
       </v-col>
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/macro.jpg"></v-img>
       </v-col>
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/nacion.jpg"></v-img>
       </v-col>
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/supervielle.jpg"></v-img>
       </v-col>
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/LOGO_HSBC.jpg"></v-img>
       </v-col>
-      <v-col class="mt-12 ma-2" md="1">
+      <v-col class="ma-2" md="1">
         <v-img src="../assets/pago/LOGO_ICBC.jpg"></v-img>
       </v-col>
     </v-row>

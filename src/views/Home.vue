@@ -24,7 +24,7 @@
         </v-carousel-item>
       </v-carousel>
       <div>
-        <h3 class="font-weight-medium pt-12">Nuestros Clientes</h3>
+        <h3 class="font-weight-medium pt-12">Comentarios de nuestros Clientes</h3>
         <v-row class="pt-6 pb-12" justify="space-between">
           <v-card class="ma-3" width="200px" v-for="comentario in comentarios" :key="comentario.persona">
             <v-card-text>

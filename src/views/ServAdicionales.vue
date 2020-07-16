@@ -28,7 +28,7 @@
             <v-avatar color="orange lighten-2" size="70">
               <span class="white--text">Peón</span>
             </v-avatar>
-            <v-card-text class="font-weight-bold">Nuestro personal está capacitado en la carga y descarga de elementos, su distribucion y manipulación. Están altamente calificados en el traslado de objetos con rapidez pero con mucho cuidado</v-card-text>
+            <v-card-text class="font-weight-bold">Nuestro personal está capacitado en la carga y descarga de elementos, su distribución y manipulación. Están altamente calificados en el traslado de objetos con rápidez pero con mucho cuidado.</v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12">
@@ -52,7 +52,7 @@
             <v-avatar color="orange lighten-2" size="70">
               <span class="white--text">Escalera</span>
             </v-avatar>
-            <v-card-text class="font-weight-bold">No es lo mismo un primer piso que un numero catorce! Hay muchos elementos que no pueden trasladarse en ascensor asi que es un servicio a tener en cuenta para que nuestro personal se haga cargo</v-card-text>
+            <v-card-text class="font-weight-bold">No es lo mismo un primer piso que un número catorce! Hay muchos elementos que no pueden trasladarse en ascensor asi que es un servicio a tener en cuenta para que nuestro personal se haga cargo</v-card-text>
           </v-card>
         </v-col>
         <v-col cols="12">
@@ -60,7 +60,7 @@
             <v-avatar color="orange lighten-2" size="70">
               <span class="white--text">Canasto</span>
             </v-avatar>
-            <v-card-text class="font-weight-bold">¿No encontras cajas grandes? Despreocupate, te alcanzamos los canastos que te hagan falta y listo!</v-card-text>
+            <v-card-text class="font-weight-bold">¿No encontrás cajas grandes? Despreocupate, te alcanzamos los canastos que te hagan falta y listo!</v-card-text>
           </v-card>
         </v-col>
       </v-row>

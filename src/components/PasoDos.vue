@@ -369,21 +369,29 @@ export default {
     armarFormulario() {
       this.form.vehiculo = this.obtenerVehiculo.nombre;
       for (let index = 0; index < this.obtenerServicios.length; index++) {
-        this.form.serviciosAdicio.push(this.obtenerServicios[index].nombre)
+        this.form.serviciosAdicio.push(this.obtenerServicios[index].nombre);
       }
     },
     async postpedido() {
-      this.armarFormulario()
+      this.armarFormulario();
       let pedido = this.form;
       if (!this.$v.$invalid) {
         try {
           const respuesta = await axios.post("/pedido", pedido);
           console.log("success");
+          let id = await this.getpedidoid()
+          this.value = "http://localhost:8080/pedido/" + id;
           return respuesta;
         } catch (error) {
           console.log(error);
         }
       }
+    },
+    async getpedidoid() {
+      const respuesta = await axios.get("/pedido");
+      let pedido = respuesta.data;
+      console.log(pedido)
+      return pedido.length;
     }
   },
   computed: {

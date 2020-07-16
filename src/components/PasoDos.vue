@@ -195,13 +195,16 @@
             v-show="obtenerServicios.length >0"
             v-for="servicio in obtenerServicios"
             :key="servicio.nombre"
-          >{{servicio.nombre}}<br></span>
+          >
+            {{servicio.nombre}}
+            <br />
+          </span>
           <v-card-text>{{`por un costo total de $ ${calcularPromo(form.tipoPago)}`}}</v-card-text>
           <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="dialog = false">OK</v-btn>
+            <v-btn color="primary" @click="enviarAHome()">OK</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -348,6 +351,10 @@ export default {
         );
       }
     },
+    enviarAHome() {
+      this.dialog = false;
+      this.$router.push("/");
+    },
     mostrarCuotas() {
       this.mostrar = true;
     },
@@ -379,7 +386,7 @@ export default {
         try {
           const respuesta = await axios.post("/pedido", pedido);
           console.log("success");
-          let id = await this.getpedidoid()
+          let id = await this.getpedidoid();
           this.value = "http://localhost:8080/pedido/" + id;
           return respuesta;
         } catch (error) {
@@ -390,7 +397,7 @@ export default {
     async getpedidoid() {
       const respuesta = await axios.get("/pedido");
       let pedido = respuesta.data;
-      console.log(pedido)
+      console.log(pedido);
       return pedido.length;
     }
   },

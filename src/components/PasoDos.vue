@@ -201,6 +201,7 @@
           </span>
           <v-card-text>{{`por un costo total de $ ${calcularPromo(form.tipoPago)}`}}</v-card-text>
           <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue>
+          <h3>Su numero de pedido es "{{this.id}}"</h3>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -298,7 +299,8 @@ export default {
       mostrar: false,
       menu: false,
       dialog: false,
-      submitStatus: null
+      submitStatus: null,
+      id: ""
     };
   },
   components: {
@@ -386,8 +388,8 @@ export default {
         try {
           const respuesta = await axios.post("/pedido", pedido);
           console.log("success");
-          let id = await this.getpedidoid();
-          this.value = "http://localhost:8080/pedido/" + id;
+          this.id = await this.getpedidoid();
+          this.value = "http://localhost:8080/pedido/" + this.id;
           return respuesta;
         } catch (error) {
           console.log(error);
